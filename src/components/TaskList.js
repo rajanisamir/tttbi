@@ -26,12 +26,21 @@ function TaskList({ tasks, completeTask, removeTask, updateTask }) {
       className={
         "task-row" +
         (task.isComplete ? " complete" : "") +
-        (task.custom ? " custom" : "")
+        (task.custom ? " custom" : "") +
+        (task.courseIndex != null ? " courseIndex" + task.courseIndex : "")
       }
       key={index}
     >
-      <div key={task.id} onClick={() => completeTask(task.id)}>
-        {task.text}
+      <div
+        style={{ display: "flex", flexDirection: "vertical" }}
+        key={task.id}
+        onClick={() => completeTask(task.id)}
+      >
+        <b>
+          {task.course != null ? "[" + task.course.substring(0, 10) + "]" : ""}
+        </b>
+        &nbsp;
+        <p>{task.text}</p>
       </div>
 
       <div className="icons">

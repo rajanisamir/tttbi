@@ -101,6 +101,30 @@ h1 {
   background: #8d94ba;
 }
 
+.courseIndex0 {
+  background: #2e4d37;
+}
+
+.courseIndex1 {
+  background: #862809;
+}
+
+.courseIndex2 {
+  background: #3e2837;
+}
+
+.courseIndex3 {
+  background: #994636;
+}
+
+.courseIndex4 {
+  background: #a56427;
+}
+
+.courseIndex5 {
+  background: #19535f;
+}
+
 .icons {
   display: flex;
   align-items: center;

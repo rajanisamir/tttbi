@@ -15,13 +15,20 @@ function TaskManager() {
       const response = await axios(url);
       const json = JSON.parse(response.data.replace(/'/g, '"')).assignments; // Replace single quotes with double quotes!
       let assignments = [];
+      let courses = [];
       json.forEach((assignment) => {
+        if (!courses.includes(assignment.Course)) {
+          courses = [...courses, assignment.Course];
+        }
         const newAssignment = {
+          course: assignment.Course,
           text: assignment.Name,
           id: assignment.ID,
           custom: false,
+          courseIndex: courses.indexOf(assignment.Course),
         };
         assignments = [newAssignment, ...assignments];
+        console.log(newAssignment);
       });
       setTasks((tasks) => [...assignments, ...tasks]);
     };
