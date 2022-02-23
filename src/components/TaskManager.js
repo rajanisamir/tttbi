@@ -21,6 +21,7 @@ function TaskManager() {
           courses = [...courses, assignment.Course];
         }
         const newAssignment = {
+          due: assignment.Due,
           course: assignment.Course,
           text: assignment.Name,
           id: assignment.ID,

@@ -37,6 +37,15 @@ function TaskEntry(props) {
         onChange={handleChange}
         ref={inputRef}
       />
+      {/* <input2
+        type="text"
+        placeholder="MM/DD/YYYY"
+        value={inputs.date}
+        name="date"
+        className="task-input-date"
+        onChange={handleChange}
+        ref={inputRef2}
+      /> */}
       <button className="task-input-submit">Add Task</button>
     </form>
   );

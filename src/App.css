@@ -3,24 +3,67 @@
   margin: 0;
   padding: 0;
   font-family: "Lato", "Trebuchet MS", sans-serif;
+  position: relative;
+  z-index: 100;
 }
 
-body {
+/* body {
   background: linear-gradient(
     90deg,
     rgba(160, 207, 211, 1) 0%,
     rgba(180, 237, 210, 1) 100%
   );
+} */
+.main-view {
+  margin: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
 }
 
-.main-view {
+.button {
+  font-family: cursive;
+  padding: 10px;
+  margin: 20px;
+  border-radius: 10px;
+  font-size: large;
+  background-color: lightblue;
+  color: teal;
+}
+
+.profile-tab {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   width: 80%;
-  background: #87677b;
+  background: #966ea0;
   text-align: center;
-  margin: 128px auto;
+  border-radius: 40px;
+  padding-bottom: 32px;
+  margin: 100px;
+}
+
+.map-tab {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 80%;
+  background: #966ea0;
+  text-align: center;
+  border-radius: 40px;
+  padding-bottom: 32px;
+  margin: 100px;
+}
+
+.task-manager-tab {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 80%;
+  background: #966ea0;
+  text-align: center;
   border-radius: 40px;
   padding-bottom: 32px;
 }
@@ -102,11 +145,11 @@ h1 {
 }
 
 .courseIndex0 {
-  background: #2e4d37;
+  background: #468858;
 }
 
 .courseIndex1 {
-  background: #862809;
+  background: #6d084b;
 }
 
 .courseIndex2 {

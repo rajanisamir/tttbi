@@ -2,12 +2,18 @@ import React, { useState } from "react";
 import TaskEntry from "./TaskEntry";
 import { RiCloseCircleLine } from "react-icons/ri";
 import { TiEdit } from "react-icons/ti";
+import moment from 'moment';
+moment().format();
+
+// const assignmentScore = 0;
 
 function TaskList({ tasks, completeTask, removeTask, updateTask }) {
   const [edit, setEdit] = useState({
     id: null,
     value: "",
   });
+
+  var assignmentScore;
 
   const submitUpdate = (value) => {
     updateTask(edit.id, value);
@@ -21,7 +27,23 @@ function TaskList({ tasks, completeTask, removeTask, updateTask }) {
     return <TaskEntry edit={edit} onSubmit={submitUpdate} />;
   }
 
-  return tasks.map((task, index) => (
+  // keeps items with no deadline to place them at top of list
+  const todo = tasks.filter(task => {
+    if (!task.due)
+      return true;
+  })
+  // sort tasks by date
+  const sortedtasks = tasks.slice().sort((a, b) => b.due > a.due ? -1: 1);
+  // filter out past due assignments --> may change this to completed assignments later
+  const currtasks = sortedtasks.filter(task => {
+    if (moment(task.due) > moment())
+      return true;
+  })
+  global.assignmentScore = (tasks.length - currtasks.length)*5;
+
+  const alltasks = todo.concat(currtasks);
+
+  return alltasks.map((task, index) => (
     <div
       className={
         "task-row" +
@@ -36,6 +58,7 @@ function TaskList({ tasks, completeTask, removeTask, updateTask }) {
         key={task.id}
         onClick={() => completeTask(task.id)}
       >
+        <p>{task.due ? moment(task.due).format('MM-DD hh:mm a') : ''}</p>
         <b>
           {task.course != null ? "[" + task.course.substring(0, 10) + "]" : ""}
         </b>
