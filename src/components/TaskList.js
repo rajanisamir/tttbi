@@ -51,6 +51,7 @@ function TaskList({ tasks, completeTask, removeTask, updateTask }) {
         (task.custom ? " custom" : "") +
         (task.courseIndex != null ? " courseIndex" + task.courseIndex : "")
       }
+      onClick={() => completeTask(task.id)}
       key={index}
     >
       <div
@@ -65,16 +66,32 @@ function TaskList({ tasks, completeTask, removeTask, updateTask }) {
         &nbsp;
         <p>{task.text}</p>
       </div>
-
-      <div className="icons">
-        <RiCloseCircleLine
-          onClick={() => removeTask(task.id)}
-          className="delete-icon"
-        />
-        <TiEdit
-          onClick={() => setEdit({ id: task.id, value: task.text })}
-          className="edit-icon"
-        />
+      <div>{task.text}</div>
+      <div className="task-row-date-icons">
+        <p>
+          {task.dueDate
+            ? task.dueDate.getUTCMonth() +
+              1 +
+              "/" +
+              task.dueDate.getUTCDate() +
+              "/" +
+              task.dueDate.getUTCFullYear() +
+              ", " +
+              task.dueDate.getUTCHours() +
+              ":" +
+              ("0" + task.dueDate.getUTCMinutes()).slice(-2)
+            : ""}
+        </p>
+        <div className="task-row-icons">
+          <RiCloseCircleLine
+            onClick={() => removeTask(task.id)}
+            className="delete-icon"
+          />
+          <TiEdit
+            onClick={() => setEdit({ id: task.id, value: task.text })}
+            className="edit-icon"
+          />
+        </div>
       </div>
     </div>
   ));
