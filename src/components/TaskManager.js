@@ -17,10 +17,12 @@ function TaskManager() {
       let assignments = [];
       let courses = [];
       json.forEach((assignment) => {
+        if (new Date() > new Date(assignment.Due)) return;
         if (!courses.includes(assignment.Course)) {
           courses = [...courses, assignment.Course];
         }
         const newAssignment = {
+          dueDate: new Date(assignment.Due),
           course: assignment.Course,
           text: assignment.Name,
           id: assignment.ID,
