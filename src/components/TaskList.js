@@ -13,8 +13,6 @@ function TaskList({ tasks, completeTask, removeTask, updateTask }) {
     value: "",
   });
 
-  var assignmentScore;
-
   const submitUpdate = (value) => {
     updateTask(edit.id, value);
     setEdit({
@@ -66,22 +64,7 @@ function TaskList({ tasks, completeTask, removeTask, updateTask }) {
         &nbsp;
         <p>{task.text}</p>
       </div>
-      <div>{task.text}</div>
       <div className="task-row-date-icons">
-        <p>
-          {task.dueDate
-            ? task.dueDate.getUTCMonth() +
-              1 +
-              "/" +
-              task.dueDate.getUTCDate() +
-              "/" +
-              task.dueDate.getUTCFullYear() +
-              ", " +
-              task.dueDate.getUTCHours() +
-              ":" +
-              ("0" + task.dueDate.getUTCMinutes()).slice(-2)
-            : ""}
-        </p>
         <div className="task-row-icons">
           <RiCloseCircleLine
             onClick={() => removeTask(task.id)}
