@@ -348,7 +348,7 @@ class VRScene extends React.Component {
             visible="false"
             position="0 3 0"
             radius="2"
-            color="magenta"
+            color="teal"
           />
           <Entity
             primitive="a-text"
@@ -358,7 +358,7 @@ class VRScene extends React.Component {
             value="Breathe In and Out with the Sphere"
             font="monoid"
             position="-4 7 0"
-            color="magenta"
+            color="teal"
           />
         </Entity>
         {/* camera rig + cursor */}
@@ -376,7 +376,7 @@ class VRScene extends React.Component {
         <Entity primitive="a-asset" id="tree2-mtl" src="/game/models/tree2.obj"/> */}
         {/* <Entity primitive="a-entity" obj-model="obj: #tree2-obj; mtl: #tree2-mtl" position="-2 0 -3"/> */}
         {/* <Entity primitive="a-entity" clone="#tree" position = "-2 0 -3"></Entity> */}
-        {/* <Entity primitive='a-sky' src="#sky"/>  */}
+        {/* <Entity primitive="a-sky" src="#sky" /> */}
       </Scene>
     );
   }
