@@ -71,7 +71,7 @@ function TaskManager() {
   };
 
   return (
-    <div>
+    <div style={{ overflow: "scroll", maxHeight: "450px" }}>
       <h1>Your Tasks</h1>
       <TaskEntry onSubmit={addTask} />
       <TaskList

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 
 function TaskEntry(props) {
   const [input, setInput] = useState("");
+  const [dateInput, setDateInput] = useState("");
 
   const inputRef = useRef(null);
 
@@ -13,6 +14,10 @@ function TaskEntry(props) {
     setInput(e.target.value);
   };
 
+  const handleDateChange = (e) => {
+    setDateInput(e.target.value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -21,6 +26,7 @@ function TaskEntry(props) {
       id: Math.floor(Math.random() * 100000),
       text: input,
       custom: true,
+      due: dateInput,
     });
 
     setInput("");
@@ -37,16 +43,13 @@ function TaskEntry(props) {
         onChange={handleChange}
         ref={inputRef}
       />
-      {/* <input2
-        type="text"
-        placeholder="MM/DD/YYYY"
-        value={inputs.date}
-        name="date"
-        className="task-input-date"
-        onChange={handleChange}
-        ref={inputRef2}
-      /> */}
       <button className="task-input-submit">Add Task</button>
+      <input
+        type="date"
+        name="due-date"
+        className="task-date-input"
+        onChange={handleDateChange}
+      />
     </form>
   );
 }

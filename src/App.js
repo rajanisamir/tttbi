@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import "./App.css";
 import TaskManager from "./components/TaskManager";
-import Profile from "./components/Profile"
-import Map from "./components/Map"
-
-
+import Profile from "./components/Profile";
+import Map from "./components/Map";
 
 function App() {
   const [profile, p_visible] = useState(false);
@@ -13,21 +11,30 @@ function App() {
 
   return (
     <div className="main-view">
-      <button className="button" onClick={() => p_visible(!profile)}>profile</button>
-      <button className="button" onClick={() => a_visible(!assignments)}>assignments</button>
-      <button className="button" onClick={() => m_visible(!map)}>map</button>
-      {assignments && 
+      <button className="button" onClick={() => p_visible(!profile)}>
+        profile
+      </button>
+      <button className="button" onClick={() => a_visible(!assignments)}>
+        assignments
+      </button>
+      <button className="button" onClick={() => m_visible(!map)}>
+        map
+      </button>
+      {assignments && (
         <div className="task-manager-tab">
-          <TaskManager/>
-        </div>}
-      {profile && 
+          <TaskManager />
+        </div>
+      )}
+      {profile && (
         <div className="profile-tab">
-          <Profile/>
-        </div>}
-      {map && 
+          <Profile />
+        </div>
+      )}
+      {map && (
         <div className="map-tab">
-          <Map/>
-        </div>}
+          <Map />
+        </div>
+      )}
     </div>
   );
 }
