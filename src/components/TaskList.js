@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TaskEntry from "./TaskEntry";
 import { RiCloseCircleLine } from "react-icons/ri";
 import { TiEdit } from "react-icons/ti";
-import moment from 'moment';
+import moment from "moment";
 moment().format();
 
 // const assignmentScore = 0;
@@ -26,22 +26,20 @@ function TaskList({ tasks, completeTask, removeTask, updateTask }) {
   }
 
   // keeps items with no deadline to place them at top of list
-  const todo = tasks.filter(task => {
-    if (!task.due)
-      return true;
-  })
+  const todo = tasks.filter((task) => {
+    if (!task.due) return true;
+  });
   // sort tasks by date
-  const sortedtasks = tasks.slice().sort((a, b) => b.due > a.due ? -1: 1);
+  const sortedTasks = tasks.slice().sort((a, b) => (b.due > a.due ? -1 : 1));
   // filter out past due assignments --> may change this to completed assignments later
-  const currtasks = sortedtasks.filter(task => {
-    if (moment(task.due) > moment())
-      return true;
-  })
-  global.assignmentScore = (tasks.length - currtasks.length)*5;
+  const currTasks = sortedTasks.filter((task) => {
+    if (moment(task.due) > moment()) return true;
+  });
+  global.assignmentScore = (tasks.length - currTasks.length) * 5;
 
-  const alltasks = todo.concat(currtasks);
+  const allTasks = todo.concat(currTasks);
 
-  return alltasks.map((task, index) => (
+  return allTasks.map((task, index) => (
     <div
       className={
         "task-row" +
@@ -49,7 +47,8 @@ function TaskList({ tasks, completeTask, removeTask, updateTask }) {
         (task.custom ? " custom" : "") +
         (task.courseIndex != null ? " courseIndex" + task.courseIndex : "")
       }
-      onClick={() => completeTask(task.id)}
+      // This prevents you from removing a task at the moment.
+      // onClick={() => completeTask(task.id)}
       key={index}
     >
       <div
@@ -57,7 +56,7 @@ function TaskList({ tasks, completeTask, removeTask, updateTask }) {
         key={task.id}
         onClick={() => completeTask(task.id)}
       >
-        <p>{task.due ? moment(task.due).format('MM-DD hh:mm a') : ''}</p>
+        <p>{task.due ? moment(task.due).format("MM-DD hh:mm a") : ""}</p>
         <b>
           {task.course != null ? "[" + task.course.substring(0, 10) + "]" : ""}
         </b>
