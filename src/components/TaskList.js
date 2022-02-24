@@ -27,6 +27,8 @@ function TaskList({ tasks, completeTask, removeTask, updateTask }) {
     return <TaskEntry edit={edit} onSubmit={submitUpdate} />;
   }
 
+  console.log(tasks);
+
   // keeps items with no deadline to place them at top of list
   const todo = tasks.filter((task) => {
     if (!task.due) return true;
@@ -38,6 +40,10 @@ function TaskList({ tasks, completeTask, removeTask, updateTask }) {
     if (moment(task.due) > moment()) return true;
   });
   global.assignmentScore = (tasks.length - currTasks.length) * 5;
+  console.log(tasks.length);
+  console.log(currTasks.length);
+  console.log(global.assignmentScore);
+
 
   const allTasks = todo.concat(currTasks);
 
