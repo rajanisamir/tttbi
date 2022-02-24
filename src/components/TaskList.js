@@ -13,6 +13,8 @@ function TaskList({ tasks, completeTask, removeTask, updateTask }) {
     value: "",
   });
 
+  global.assignmentScore = 0; 
+
   const submitUpdate = (value) => {
     updateTask(edit.id, value);
     setEdit({

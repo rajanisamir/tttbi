@@ -92,10 +92,10 @@ class VRScene extends React.Component {
         <Entity primitive="a-camera" id="rig" position="0 3 0" cursor="rayOrigin: mouse"> </Entity>
 
         --------------Assets not working-----------------
-        {/* <Entity primitive="a-image" id="sky" src="/game/imagessky3.png"/>
-        <Entity primitive="a-asset" id="tree2-obj" src="/game/models/tree2.obj"/>
-        <Entity primitive="a-asset" id="tree2-mtl" src="/game/models/tree2.obj"/> */}
-        {/* <Entity primitive="a-entity" obj-model="obj: #tree2-obj; mtl: #tree2-mtl" position="-2 0 -3"/> */}
+        {/* <Entity primitive="a-image" id="sky" src="/game/imagessky3.png"/> */}
+        {/* <Entity primitive="a-asset" id="tree2-obj" src="/game/models/tree2.obj"/> */}
+        {/* <Entity primitive="a-asset" id="tree2-mtl" src="/game/models/tree2.obj"/> */}
+        {/* <Entity obj="#tree2-obj" mtl="#tree2-mtl" position="-2 0 -3"/> */}
         {/* <Entity primitive="a-entity" clone="#tree" position = "-2 0 -3"></Entity> */}
         {/* <Entity primitive='a-sky' src="#sky"/>  */}
       </Scene>
