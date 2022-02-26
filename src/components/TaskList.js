@@ -5,15 +5,13 @@ import { TiEdit } from "react-icons/ti";
 import moment from "moment";
 moment().format();
 
-// const assignmentScore = 0;
-
 function TaskList({ tasks, completeTask, removeTask, updateTask }) {
   const [edit, setEdit] = useState({
     id: null,
     value: "",
   });
 
-  global.assignmentScore = 0; 
+  global.assignmentScore = 0;
 
   const submitUpdate = (value) => {
     updateTask(edit.id, value);
@@ -27,23 +25,17 @@ function TaskList({ tasks, completeTask, removeTask, updateTask }) {
     return <TaskEntry edit={edit} onSubmit={submitUpdate} />;
   }
 
-  console.log(tasks);
-
   // keeps items with no deadline to place them at top of list
   const todo = tasks.filter((task) => {
-    if (!task.due) return true;
+    return !task.due;
   });
   // sort tasks by date
   const sortedTasks = tasks.slice().sort((a, b) => (b.due > a.due ? -1 : 1));
   // filter out past due assignments --> may change this to completed assignments later
   const currTasks = sortedTasks.filter((task) => {
-    if (moment(task.due) > moment()) return true;
+    return moment(task.due) > moment();
   });
   global.assignmentScore = (tasks.length - currTasks.length) * 5;
-  console.log(tasks.length);
-  console.log(currTasks.length);
-  console.log(global.assignmentScore);
-
 
   const allTasks = todo.concat(currTasks);
 

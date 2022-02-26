@@ -6,41 +6,22 @@ import ReactDOM from "react-dom";
 import App from "./App";
 
 class VRScene extends React.Component {
-  handleClick = () => {
+  toggleMeditation = (object, instructionText, startText, stopText) => () => {
     var scene = document.querySelector("#scene");
-    var sphere = scene.querySelector("#sphere");
+    var sphere = scene.querySelector(object);
     sphere.setAttribute("visible", !sphere.getAttribute("visible"));
     sphere.setAttribute(
       "animation",
       "property: scale; to: .5 .5 .5; dur: 4000; dir: alternate; loop: true;"
     );
-    var meditationInstr = scene.querySelector("#meditate-instr");
+    var meditationInstr = scene.querySelector(instructionText);
     meditationInstr.setAttribute(
       "visible",
       !meditationInstr.getAttribute("visible")
     );
-    var startMed = scene.querySelector("#start-med");
+    var startMed = scene.querySelector(startText);
     startMed.setAttribute("visible", !startMed.getAttribute("visible"));
-    var stopMed = scene.querySelector("#stop-med");
-    stopMed.setAttribute("visible", !stopMed.getAttribute("visible"));
-  };
-
-  handleClick2 = () => {
-    var scene = document.querySelector("#scene");
-    var sphere = scene.querySelector("#sphere2");
-    sphere.setAttribute("visible", !sphere.getAttribute("visible"));
-    sphere.setAttribute(
-      "animation",
-      "property: scale; to: .5 .5 .5; dur: 4000; dir: alternate; loop: true;"
-    );
-    var meditationInstr = scene.querySelector("#meditate-instr2");
-    meditationInstr.setAttribute(
-      "visible",
-      !meditationInstr.getAttribute("visible")
-    );
-    var startMed = scene.querySelector("#start-med2");
-    startMed.setAttribute("visible", !startMed.getAttribute("visible"));
-    var stopMed = scene.querySelector("#stop-med2");
+    var stopMed = scene.querySelector(stopText);
     stopMed.setAttribute("visible", !stopMed.getAttribute("visible"));
   };
 
@@ -48,7 +29,7 @@ class VRScene extends React.Component {
     var scene = document.querySelector("#scene");
     var world2 = scene.querySelector("#world2");
     if (global.assignmentScore > 10) {
-      world2.setAttribute('visible', 'true');
+      world2.setAttribute("visible", "true");
     }
   };
 
@@ -66,16 +47,15 @@ class VRScene extends React.Component {
       "#679267",
     ];
     let cube_tree_colors = [
-      '#A32CC4',
-      '#7A4988',
-      '#9e7bb5',
-      '#311432',
-      '#b5338a',
-      '#8d4585',
-      '#b47ede',
-      '#81007f'
+      "#A32CC4",
+      "#7A4988",
+      "#9e7bb5",
+      "#311432",
+      "#b5338a",
+      "#8d4585",
+      "#b47ede",
+      "#81007f",
     ];
-
     return (
       <Scene id="scene" events={{ click: this.handleWorlds }}>
         {/* environment */}
@@ -87,7 +67,7 @@ class VRScene extends React.Component {
           position="1 2 3"
         />
         <Entity primitive="a-sky" color="#7BC8A4" />
-        <Entity id="world1" visible="true" >
+        <Entity id="world1" visible="true">
           <Entity
             primitive="a-plane"
             position="0 0 -4"
@@ -361,7 +341,14 @@ class VRScene extends React.Component {
             height="0.01"
             radius="5"
             color="#90D1C7"
-            events={{ click: this.handleClick }}
+            events={{
+              click: this.toggleMeditation(
+                "#sphere",
+                "#meditate-instr",
+                "#start-med",
+                "#stop-med"
+              ),
+            }}
           >
             <Entity
               primitive="a-text"
@@ -424,7 +411,6 @@ class VRScene extends React.Component {
               {" "}
             </Entity>
             <Entity
-              
               primitive="a-box"
               depth="2"
               width="2"
@@ -447,7 +433,6 @@ class VRScene extends React.Component {
               {" "}
             </Entity>
             <Entity
-              
               primitive="a-box"
               depth="2"
               width="2"
@@ -470,7 +455,6 @@ class VRScene extends React.Component {
               {" "}
             </Entity>
             <Entity
-              
               primitive="a-box"
               depth="2"
               width="2"
@@ -493,7 +477,6 @@ class VRScene extends React.Component {
               {" "}
             </Entity>
             <Entity
-              
               primitive="a-box"
               depth="2"
               width="2"
@@ -516,7 +499,6 @@ class VRScene extends React.Component {
               {" "}
             </Entity>
             <Entity
-              
               primitive="a-box"
               depth="2"
               width="2"
@@ -539,7 +521,6 @@ class VRScene extends React.Component {
               {" "}
             </Entity>
             <Entity
-              
               primitive="a-box"
               depth="2"
               width="2"
@@ -562,7 +543,6 @@ class VRScene extends React.Component {
               {" "}
             </Entity>
             <Entity
-              
               primitive="a-box"
               depth="2"
               width="2"
@@ -585,7 +565,6 @@ class VRScene extends React.Component {
               {" "}
             </Entity>
             <Entity
-              
               primitive="a-box"
               depth="2"
               width="2"
@@ -608,7 +587,6 @@ class VRScene extends React.Component {
               {" "}
             </Entity>
             <Entity
-              
               primitive="a-box"
               depth="2"
               width="2"
@@ -631,7 +609,6 @@ class VRScene extends React.Component {
               {" "}
             </Entity>
             <Entity
-              
               primitive="a-box"
               depth="2"
               width="2"
@@ -654,7 +631,6 @@ class VRScene extends React.Component {
               {" "}
             </Entity>
             <Entity
-              
               primitive="a-box"
               depth="2"
               width="2"
@@ -677,7 +653,6 @@ class VRScene extends React.Component {
               {" "}
             </Entity>
             <Entity
-              
               primitive="a-box"
               depth="2"
               width="2"
@@ -699,7 +674,14 @@ class VRScene extends React.Component {
             depth="5"
             width="10"
             color="magenta"
-            events={{ click: this.handleClick2 }}
+            events={{
+              click: this.toggleMeditation(
+                "#sphere2",
+                "#meditate-instr2",
+                "#start-med2",
+                "#stop-med2"
+              ),
+            }}
           >
             <Entity
               primitive="a-text"
@@ -738,7 +720,6 @@ class VRScene extends React.Component {
             />
           </Entity>
         </Entity>
-
         {/* camera rig + cursor */}
         <Entity
           primitive="a-camera"
@@ -748,8 +729,6 @@ class VRScene extends React.Component {
         >
           {" "}
         </Entity>
-
-        {this.handleWorlds}
         --------------Assets not working-----------------
         {/* <Entity primitive="a-image" id="sky" src="/game/imagessky3.png"/> */}
         {/* <Entity primitive="a-asset" id="tree2-obj" src="/game/models/tree2.obj"/> */}

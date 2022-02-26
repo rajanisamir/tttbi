@@ -11,7 +11,6 @@ function TaskManager() {
       "https://pyq1flh805.execute-api.us-east-1.amazonaws.com/test/assignments";
 
     const fetchData = async () => {
-      console.log("fetching...");
       const response = await axios(url);
       const json = JSON.parse(response.data.replace(/'/g, '"')).assignments; // Replace single quotes with double quotes!
       let assignments = [];
@@ -30,7 +29,6 @@ function TaskManager() {
           courseIndex: courses.indexOf(assignment.Course),
         };
         assignments = [newAssignment, ...assignments];
-        console.log(newAssignment);
       });
       setTasks((tasks) => [...assignments, ...tasks]);
     };
