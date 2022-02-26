@@ -7,15 +7,10 @@
   z-index: 100;
 }
 
-/* body {
-  background: linear-gradient(
-    90deg,
-    rgba(160, 207, 211, 1) 0%,
-    rgba(180, 237, 210, 1) 100%
-  );
-} */
 .main-view {
+  position: absolute;
   margin: 20px;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -38,7 +33,7 @@
   flex-direction: column;
   justify-content: flex-start;
   width: 80%;
-  background: teal;
+  background: rgba(0, 128, 128, 0.8);
   text-align: center;
   border-radius: 40px;
   padding-bottom: 32px;
@@ -49,7 +44,7 @@
   flex-direction: column;
   justify-content: flex-start;
   width: 80%;
-  background: teal;
+  background: rgba(0, 128, 128, 0.8);
   text-align: center;
   border-radius: 40px;
   padding-bottom: 32px;
@@ -60,7 +55,7 @@
   flex-direction: column;
   justify-content: flex-start;
   width: 80%;
-  background: teal;
+  background: rgba(0, 128, 128, 0.8);
   text-align: center;
   border-radius: 40px;
   padding-bottom: 32px;
@@ -206,4 +201,23 @@ h1 {
 
 .edit-icon {
   color: #fff;
+}
+
+.menu-button {
+  font-size: 45px;
+  position: absolute;
+  color: #fff;
+}
+
+#map-button {
+  left: 25px;
+}
+
+#profile-button {
+  right: 25px;
+}
+
+#tasks-button {
+  right: 25px;
+  top: 65px;
 }
