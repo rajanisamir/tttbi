@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./App.css";
 import TaskManager from "./components/TaskManager";
 import Profile from "./components/Profile";
@@ -9,13 +10,44 @@ import { MdOutlineAssignment } from "react-icons/md";
 
 function App() {
   const [currentMenu, setCurrentMenu] = useState("None");
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    const url =
+      "https://pyq1flh805.execute-api.us-east-1.amazonaws.com/test/assignments";
+
+    const fetchData = async () => {
+      const response = await axios(url);
+      const json = JSON.parse(response.data.replace(/'/g, '"')).assignments; // Replace single quotes with double quotes!
+      let assignments = [];
+      let courses = [];
+      json.forEach((assignment) => {
+        if (new Date() > new Date(assignment.Due)) return;
+        if (!courses.includes(assignment.Course)) {
+          courses = [...courses, assignment.Course];
+        }
+        const newAssignment = {
+          due: assignment.Due,
+          course: assignment.Course,
+          text: assignment.Name,
+          id: assignment.ID,
+          custom: false,
+          courseIndex: courses.indexOf(assignment.Course),
+        };
+        assignments = [newAssignment, ...assignments];
+      });
+      setTasks((tasks) => [...assignments, ...tasks]);
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div>
       <div className="main-view">
         {currentMenu === "Tasks" && (
           <div className="task-manager-tab">
-            <TaskManager />
+            <TaskManager tasks={tasks} setTasks={setTasks} />
           </div>
         )}
         {currentMenu === "Profile" && (
