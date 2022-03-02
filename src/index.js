@@ -58,6 +58,10 @@ class VRScene extends React.Component {
     ];
     return (
       <Scene id="scene" events={{ click: this.handleWorlds }}>
+        <a-assets>
+          <a-asset-item id="tree-o" src="models/tree2.obj"></a-asset-item>
+          <a-asset-item id="tree-m" src="models/tree2.mtl"></a-asset-item>
+        </a-assets>
         {/* environment */}
         <Entity
           primitive="a-light"
@@ -729,13 +733,16 @@ class VRScene extends React.Component {
         >
           {" "}
         </Entity>
-        --------------Assets not working-----------------
-        {/* <Entity primitive="a-image" id="sky" src="/game/imagessky3.png"/> */}
-        {/* <Entity primitive="a-asset" id="tree2-obj" src="/game/models/tree2.obj"/> */}
-        {/* <Entity primitive="a-asset" id="tree2-mtl" src="/game/models/tree2.mtl"/> */}
-        {/* <Entity obj-model={{src: "/game/models/tree2.obj", mtl: "/game/models/tree2.mtl"}} position="-2 0 -3"/> */}
-        {/* <Entity primitive="a-entity" clone="#tree" position = "-2 0 -3"></Entity> */}
-        {/* <Entity primitive="a-sky" material={{src: "/game/imagessky3.png"}} /> */}
+        <Entity
+          obj-model="obj: #tree-o; mtl: #tree-m"
+          position="-25 0 -35"
+          scale="0.5 0.5 0.5"
+        />
+        <Entity
+          obj-model="obj: #tree-o; mtl: #tree-m"
+          position="15 0 -35"
+          scale="0.5 0.5 0.5"
+        />
       </Scene>
     );
   }
