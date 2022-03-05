@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 import TaskEntry from "./TaskEntry";
 import TaskList from "./TaskList";
 
@@ -18,11 +18,14 @@ function TaskManager({ tasks, setTasks }) {
   };
 
   const updateTask = (id, newValue) => {
-    if (!newValue.text || /^\s*$/.test(newValue.text)) {
-      return;
-    }
+    console.log(newValue);
+    // if (!newValue.text || /^\s*$/.test(newValue.text)) {
+    //   return;
+    // }
 
-    setTasks((prev) => prev.map((item) => (item.id === id ? newValue : item)));
+    // setTasks((prev) => prev.map((item) => (item.id === id ? newValue : item)));
+    tasks.find(item => item.id === id).string = newValue;
+    setTasks(tasks);
   };
 
   const completeTask = (id) => {
@@ -34,17 +37,37 @@ function TaskManager({ tasks, setTasks }) {
     });
     setTasks(updatedTasks);
   };
+  
+  const [editMode, setEditMode] = useState(false);
+  const setEdit = useCallback((state) => {
+    setEditMode(state);
+  }, [setEditMode]);
+
+  const [selectedTask, setSelectedTask] = useState(false);
+  const setTask = useCallback((state) => {
+    setSelectedTask(state);
+  }, [setSelectedTask]);
 
   return (
     <div style={{ overflow: "scroll", maxHeight: "450px" }}>
       <h1>Your Tasks</h1>
-      <TaskEntry onSubmit={addTask} />
+      <TaskEntry 
+        editMode={editMode} 
+        onSubmit={addTask} 
+        setEditMode={setEdit}
+        selectedTask={selectedTask}
+      />
       <TaskList
         tasks={tasks}
         completeTask={completeTask}
         removeTask={removeTask}
         updateTask={updateTask}
+        onSubmit={addTask}
+        editMode={editMode}
+        setEditMode={setEdit}
+        setTask={setTask}
       />
+      
     </div>
   );
 }

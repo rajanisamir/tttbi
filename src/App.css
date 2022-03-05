@@ -209,6 +209,16 @@ h1 {
   color: #fff;
 }
 
+.filter-button {
+  padding: 16px;
+  border: none;
+  border-radius: 15px 15px 15px ;
+  cursor: pointer;
+  outline: none;
+  background: #8d94ba;
+  color: #fff;
+}
+
 #map-button {
   left: 25px;
 }

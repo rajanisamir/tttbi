@@ -1,82 +1,105 @@
-import React, { useState } from "react";
-import TaskEntry from "./TaskEntry";
-import { RiCloseCircleLine } from "react-icons/ri";
-import { TiEdit } from "react-icons/ti";
+import React, { useState, useEffect } from "react";
+import TaskListItem from "./TaskListItem";
+import { IoMdArrowRoundDown, IoMdArrowRoundUp } from "react-icons/io";
 import moment from "moment";
 moment().format();
 
-function TaskList({ tasks, completeTask, removeTask, updateTask }) {
-  const [edit, setEdit] = useState({
-    id: null,
-    value: "",
-  });
+/* task list interface */
+function TaskList({ tasks, completeTask, removeTask, updateTask, editMode, setEditMode, setTask }) {
+
+  const [filterDate, setFilterDate] = useState(true);
+
+  const [allTasks, setTasks] = useState([]);
+
+  // default: tasks sorted by due date
+  const sortTaskDates = (descending, taskList) => {
+    // keeps items with no deadline to place them at top of list
+    const todo = taskList.filter((task) => {
+      return !task.due;
+    });
+    // sort tasks by date
+    var sortedTasks = [];
+    if (descending) {
+      sortedTasks = taskList.slice().sort((a, b) => (b.due > a.due ? -1 : 1));
+    } else {
+      sortedTasks = taskList.slice().sort((a, b) => (b.due > a.due ? 1 : -1));
+    }
+    // filter out past due assignments --> may change this to completed assignments later
+    const currTasks = sortedTasks.filter((task) => {
+      return moment(task.due) > moment();
+    });
+    
+    global.assignmentScore = (taskList.length - currTasks.length) * 5;
+    return todo.concat(currTasks);
+  };
+
+  useEffect(() => {
+    setTasks(sortTaskDates(true,tasks));
+  }, [tasks]);
+
+  function onFilterDate() {
+    if (!filterDate) {
+        setTasks(sortTaskDates(true,allTasks));
+        setFilterDate(true);
+    } else {
+        setTasks(sortTaskDates(false,allTasks));
+        setFilterDate(false);
+      }
+    }
 
   global.assignmentScore = 0;
 
-  const submitUpdate = (value) => {
-    updateTask(edit.id, value);
-    setEdit({
-      id: null,
-      value: "",
-    });
+  // if (editMode) {
+  //   // setEditMode(true);
+  //   return <TaskEntry edit={editMode} onSubmit={submitUpdate} setEditMode={setEditMode} />;
+  // }
+  // compile list of course names
+  const courseNames = ["All Categories", "Personal"];
+  tasks.forEach(task => {
+      const taskName = task.course ? task.course.substring(0, 10) : "Personal";
+      if (courseNames.indexOf(taskName) === -1) {
+        courseNames.push(taskName);
+      }
+      const dateString = task.due ? moment(task.due).format("MMM DD, hh:mm a") : "";
+      const courseString = task.course != null ? "[" + task.course.substring(0, 10) + "]" : "";
+      task.string = dateString + " " + courseString + " " + task.text;
+  });
+  const handleChange = (event) => {
+    const category = event.target.value;
+    console.log(category);
+    switch (category) {
+      case "All Categories":
+        setTasks(sortTaskDates(filterDate, tasks));
+        break;
+      default:
+        setTasks(sortTaskDates(filterDate, tasks.filter((task) => {
+          const taskName = task.course ? task.course.substring(0, 10) : "Personal";
+          return taskName === category;
+        })));
+        break;
+    }
   };
 
-  if (edit.id) {
-    return <TaskEntry edit={edit} onSubmit={submitUpdate} />;
-  }
-
-  // keeps items with no deadline to place them at top of list
-  const todo = tasks.filter((task) => {
-    return !task.due;
-  });
-  // sort tasks by date
-  const sortedTasks = tasks.slice().sort((a, b) => (b.due > a.due ? -1 : 1));
-  // filter out past due assignments --> may change this to completed assignments later
-  const currTasks = sortedTasks.filter((task) => {
-    return moment(task.due) > moment();
-  });
-  global.assignmentScore = (tasks.length - currTasks.length) * 5;
-
-  const allTasks = todo.concat(currTasks);
-
-  return allTasks.map((task, index) => (
-    <div
-      className={
-        "task-row" +
-        (task.isComplete ? " complete" : "") +
-        (task.custom ? " custom" : "") +
-        (task.courseIndex != null ? " courseIndex" + task.courseIndex : "")
-      }
-      // This prevents you from removing a task at the moment.
-      // onClick={() => completeTask(task.id)}
-      key={index}
-    >
-      <div
-        style={{ display: "flex", flexDirection: "vertical" }}
-        key={task.id}
-        onClick={() => completeTask(task.id)}
-      >
-        <p>{task.due ? moment(task.due).format("MM-DD hh:mm a") : ""}</p>
-        <b>
-          {task.course != null ? "[" + task.course.substring(0, 10) + "]" : ""}
-        </b>
-        &nbsp;
-        <p>{task.text}</p>
-      </div>
-      <div className="task-row-date-icons">
-        <div className="task-row-icons">
-          <RiCloseCircleLine
-            onClick={() => removeTask(task.id)}
-            className="delete-icon"
-          />
-          <TiEdit
-            onClick={() => setEdit({ id: task.id, value: task.text })}
-            className="edit-icon"
-          />
-        </div>
-      </div>
-    </div>
-  ));
+  return <> 
+  <button className="filter-button" onClick={onFilterDate}>
+    Date &nbsp;
+    {filterDate ? <IoMdArrowRoundDown /> : <IoMdArrowRoundUp />}
+  </button>
+  &nbsp;&nbsp;
+  <select className="filter-button" onChange={handleChange}> 
+    {courseNames.map((option) => (
+      <option value={option}>{option}</option>
+    ))}
+  </select>
+  
+  {allTasks.map((task, index) => (
+  <TaskListItem 
+    task={task} 
+    index={index} 
+    completeTask={completeTask} 
+    removeTask={removeTask}
+    updateTask={updateTask} />))}
+  </>;
 }
 
 export default TaskList;

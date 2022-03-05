@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-function TaskEntry(props) {
+function TaskEntry({editMode, onSubmit, setEditMode, selectedTask}) {
   const [input, setInput] = useState("");
   const [dateInput, setDateInput] = useState("");
 
@@ -22,7 +22,7 @@ function TaskEntry(props) {
     e.preventDefault();
 
     // REDO ID
-    props.onSubmit({
+    onSubmit({
       id: Math.floor(Math.random() * 100000),
       text: input,
       custom: true,
@@ -36,7 +36,7 @@ function TaskEntry(props) {
     <form className="task-form" onSubmit={handleSubmit}>
       <input
         type="text"
-        placeholder="Add a custom task"
+        placeholder={"Add a custom task"}
         value={input}
         name="text"
         className="task-input"

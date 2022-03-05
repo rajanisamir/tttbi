@@ -33,6 +33,7 @@ function App() {
           id: assignment.ID,
           custom: false,
           courseIndex: courses.indexOf(assignment.Course),
+          string: "",
         };
         assignments = [newAssignment, ...assignments];
       });
