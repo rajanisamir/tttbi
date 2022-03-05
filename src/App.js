@@ -18,11 +18,16 @@ function App() {
 
     const fetchData = async () => {
       const response = await axios(url);
-      const json = JSON.parse(response.data.replace(/'/g, '"')).assignments; // Replace single quotes with double quotes!
+      const json = JSON.parse(
+        response.data
+          .replace(/'/g, '"')
+          .replaceAll("True", "true")
+          .replaceAll("False", "false")
+      ).assignments;
+      console.log(json);
       let assignments = [];
       let courses = [];
       json.forEach((assignment) => {
-        if (new Date() > new Date(assignment.Due)) return;
         if (!courses.includes(assignment.Course)) {
           courses = [...courses, assignment.Course];
         }

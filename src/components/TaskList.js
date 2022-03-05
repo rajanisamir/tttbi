@@ -32,9 +32,11 @@ function TaskList({ tasks, completeTask, removeTask, updateTask }) {
   // sort tasks by date
   const sortedTasks = tasks.slice().sort((a, b) => (b.due > a.due ? -1 : 1));
   // filter out past due assignments --> may change this to completed assignments later
-  const currTasks = sortedTasks.filter((task) => {
-    return moment(task.due) > moment();
-  });
+  // const currTasks = sortedTasks.filter((task) => {
+  //   return moment(task.due) > moment();
+  // });
+  const currTasks = sortedTasks;
+
   global.assignmentScore = (tasks.length - currTasks.length) * 5;
 
   const allTasks = todo.concat(currTasks);
