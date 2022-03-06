@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
+import moment from "moment";
 
-function TaskEntry({editMode, onSubmit, setEditMode, selectedTask}) {
+function TaskEntry({ onSubmit }) {
   const [input, setInput] = useState("");
   const [dateInput, setDateInput] = useState("");
 
@@ -21,13 +22,24 @@ function TaskEntry({editMode, onSubmit, setEditMode, selectedTask}) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // REDO ID
-    onSubmit({
+    const task = {
       id: Math.floor(Math.random() * 100000),
       text: input,
       custom: true,
       due: dateInput,
-    });
+      string: "",
+    };
+
+    const dateString = task.due
+      ? moment(task.due).format("MMM DD, hh:mm a")
+      : "";
+    const courseString =
+      task.course != null
+        ? "[" + task.course.substring(0, 10) + "]"
+        : "[Personal]";
+    task.string = dateString + " " + courseString + " " + task.text;
+    // REDO ID
+    onSubmit(task);
 
     setInput("");
   };

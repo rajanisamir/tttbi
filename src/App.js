@@ -7,6 +7,7 @@ import Map from "./components/Map";
 import { MdOutlineMap } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { MdOutlineAssignment } from "react-icons/md";
+import moment from "moment";
 
 function App() {
   const [currentMenu, setCurrentMenu] = useState("None");
@@ -40,6 +41,15 @@ function App() {
           courseIndex: courses.indexOf(assignment.Course),
           string: "",
         };
+        const dateString = newAssignment.due
+          ? moment(newAssignment.due).format("MMM DD, hh:mm a")
+          : "";
+        const courseString =
+          newAssignment.course != null
+            ? "[" + newAssignment.course.substring(0, 10) + "]"
+            : "";
+        newAssignment.string =
+          dateString + " " + courseString + " " + newAssignment.text;
         assignments = [newAssignment, ...assignments];
       });
       setTasks((tasks) => [...assignments, ...tasks]);

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React from "react";
 import TaskEntry from "./TaskEntry";
 import TaskList from "./TaskList";
 
@@ -12,19 +12,12 @@ function TaskManager({ tasks, setTasks }) {
   };
 
   const removeTask = (id) => {
-    // why spread here?
-    const removeArr = [...tasks].filter((task) => task.id !== id);
+    const removeArr = tasks.filter((task) => task.id !== id);
     setTasks(removeArr);
   };
 
   const updateTask = (id, newValue) => {
-    console.log(newValue);
-    // if (!newValue.text || /^\s*$/.test(newValue.text)) {
-    //   return;
-    // }
-
-    // setTasks((prev) => prev.map((item) => (item.id === id ? newValue : item)));
-    tasks.find(item => item.id === id).string = newValue;
+    tasks.find((task) => task.id === id).string = newValue;
     setTasks(tasks);
   };
 
@@ -37,37 +30,19 @@ function TaskManager({ tasks, setTasks }) {
     });
     setTasks(updatedTasks);
   };
-  
-  const [editMode, setEditMode] = useState(false);
-  const setEdit = useCallback((state) => {
-    setEditMode(state);
-  }, [setEditMode]);
-
-  const [selectedTask, setSelectedTask] = useState(false);
-  const setTask = useCallback((state) => {
-    setSelectedTask(state);
-  }, [setSelectedTask]);
 
   return (
-    <div style={{ overflow: "scroll", maxHeight: "450px" }}>
+    <div style={{ overflow: "scroll", maxHeight: 0.75 * window.innerHeight }}>
       <h1>Your Tasks</h1>
-      <TaskEntry 
-        editMode={editMode} 
-        onSubmit={addTask} 
-        setEditMode={setEdit}
-        selectedTask={selectedTask}
-      />
+      <TaskEntry onSubmit={addTask} />
       <TaskList
         tasks={tasks}
+        setTasks={setTasks}
         completeTask={completeTask}
         removeTask={removeTask}
         updateTask={updateTask}
         onSubmit={addTask}
-        editMode={editMode}
-        setEditMode={setEdit}
-        setTask={setTask}
       />
-      
     </div>
   );
 }
