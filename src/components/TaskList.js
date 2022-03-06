@@ -14,7 +14,7 @@ function TaskList({ tasks, completeTask, removeTask, updateTask }) {
   const sortTasks = (descending, taskList) => {
     // todo keeps track of items without deadlines.
     const todo = taskList.filter((task) => !task.due);
-
+    
     // sortedTasks is a sorted list of tasks
     var sortedTasks = [];
     if (descending) {
@@ -24,8 +24,8 @@ function TaskList({ tasks, completeTask, removeTask, updateTask }) {
     }
 
     // currTasks contains only tasks whose deadlines have not passed
-    const currTasks = sortedTasks.filter((task) => moment(task.due) > moment());
-
+    const currTasks = sortedTasks.filter((task) => moment(task.due,"MMM DD, hh:mm a") > moment());
+    
     // global.assignmentScore = (taskList.length - currTasks.length) * 5;
     // shouldn't really be doing it this way...
 
@@ -38,7 +38,7 @@ function TaskList({ tasks, completeTask, removeTask, updateTask }) {
     } else {
       return tasks.filter((task) => {
         const taskName = task.course
-          ? task.course.substring(0, 10)
+          ? task.course
           : "Personal";
         return taskName === filterOption;
       });
@@ -48,7 +48,7 @@ function TaskList({ tasks, completeTask, removeTask, updateTask }) {
   useEffect(() => {
     tasks.forEach((task) => {
       const taskCategory = task.course
-        ? task.course.substring(0, 10)
+        ? task.course
         : "Personal";
       if (categoryNames.indexOf(taskCategory) === -1) {
         setCategoryNames([...categoryNames, taskCategory]);

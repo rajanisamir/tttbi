@@ -17,7 +17,7 @@ function TaskManager({ tasks, setTasks }) {
   };
 
   const updateTask = (id, newValue) => {
-    tasks.find((task) => task.id === id).string = newValue;
+    tasks[tasks.findIndex((task) => task.id === id)] = newValue;
     setTasks(tasks);
   };
 

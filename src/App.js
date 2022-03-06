@@ -41,15 +41,15 @@ function App() {
           courseIndex: courses.indexOf(assignment.Course),
           string: "",
         };
-        const dateString = newAssignment.due
+        newAssignment.due = newAssignment.due
           ? moment(newAssignment.due).format("MMM DD, hh:mm a")
           : "";
-        const courseString =
+        newAssignment.course =
           newAssignment.course != null
             ? "[" + newAssignment.course.substring(0, 10) + "]"
             : "";
         newAssignment.string =
-          dateString + " " + courseString + " " + newAssignment.text;
+          newAssignment.due + " " + newAssignment.course + " " + newAssignment.text;
         assignments = [newAssignment, ...assignments];
       });
       setTasks((tasks) => [...assignments, ...tasks]);

@@ -20,7 +20,11 @@ function TaskListItem({ task, index, completeTask, removeTask, updateTask }) {
 
   const handleUpdatedDone = (event) => {
     if (event.key === "Enter") {
-      updateTask(edit.id, edit.value);
+      task.due = edit.value.split("[")[0];
+      task.course = "[" + edit.value.split("[")[1].split("]")[0] + "]";
+      task.text = edit.value.split("]")[1];
+      task.string = edit.value;
+      updateTask(edit.id, task);
       setEdit({
         id: null,
         value: "",
