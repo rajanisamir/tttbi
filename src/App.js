@@ -49,7 +49,11 @@ function App() {
             ? "[" + newAssignment.course.substring(0, 10) + "]"
             : "";
         newAssignment.string =
-          newAssignment.due + " " + newAssignment.course + " " + newAssignment.text;
+          newAssignment.due +
+          " " +
+          newAssignment.course +
+          " " +
+          newAssignment.text;
         assignments = [newAssignment, ...assignments];
       });
       setTasks((tasks) => [...assignments, ...tasks]);
