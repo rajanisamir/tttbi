@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   getAuth,
   signInWithPopup,
@@ -14,6 +14,8 @@ import {
   getDocs,
   addDoc,
   updateDoc,
+  onSnapshot,
+  increment,
 } from "firebase/firestore";
 
 function Profile() {
@@ -43,8 +45,10 @@ function Profile() {
         });
       }
       const userDocs = await getDocs(userQuery);
+      onSnapshot(doc(db, "users", userDocs.docs[0].id), (snapshot) =>
+        setScore(snapshot.data().score)
+      );
       setDocRef(doc(db, "users", userDocs.docs[0].id));
-      setScore(userDocs.docs[0].data().score);
     };
     return (
       <button className="filter-button" onClick={signInWithGoogle}>
@@ -73,9 +77,7 @@ function Profile() {
     return (
       <button
         onClick={() => {
-          const newScore = score + 1;
-          setScore(newScore);
-          updateDoc(docRef, { score: newScore });
+          updateDoc(docRef, { score: increment(1) });
         }}
         className="filter-button"
       >
