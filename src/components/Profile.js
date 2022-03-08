@@ -17,6 +17,9 @@ import {
   onSnapshot,
   increment,
 } from "firebase/firestore";
+import { IoIosTrophy } from "react-icons/io";
+import { IoIosKey } from "react-icons/io";
+import { IoMdPerson } from "react-icons/io";
 
 function Profile() {
   const [user, setUser] = useState(null);
@@ -46,12 +49,8 @@ function Profile() {
       }
       const userDocs = await getDocs(userQuery);
       onSnapshot(doc(db, "users", userDocs.docs[0].id), (snapshot) =>
-<<<<<<< HEAD
-        setScore(snapshot.data().score)
-=======
         setScore(snapshot.data().score),
         global.assignmentScore = score
->>>>>>> 3dc921efc312e543d9a1ad88fa7f28c8b4b283fc
       );
       setDocRef(doc(db, "users", userDocs.docs[0].id));
     };
@@ -83,10 +82,7 @@ function Profile() {
       <button
         onClick={() => {
           updateDoc(docRef, { score: increment(1) });
-<<<<<<< HEAD
-=======
           global.assignmentScore = score;
->>>>>>> 3dc921efc312e543d9a1ad88fa7f28c8b4b283fc
         }}
         className="filter-button"
       >
@@ -98,6 +94,10 @@ function Profile() {
   return (
     <div>
       <h1>User Profile</h1>
+      <div className={"profile-pic"}>
+            < IoMdPerson size={100} />
+      </div>
+      <br />
       <b>Name: </b> {user ? user.displayName : "Anonymous User"}
       <br />
       <br />
@@ -109,6 +109,47 @@ function Profile() {
       <br />
       <MagicButton />
       {/* <p>Assignment Score: {global.assignmentScore}</p> */}
+      <br />
+      <br />
+      <div className={"world-row-icons"}>
+        <IoIosKey size={70}
+          className={"world-icon"}
+        />
+        <IoIosKey size={70}
+          className={"world-icon"}
+        />
+        <IoIosKey size={70}
+          className={"world-icon"}
+        />
+        <IoIosKey size={70}
+          className={"world-icon"}
+        />
+      </div>
+      <br />
+      <div className={"world-point-row-values"}>
+        <div class={"world-point-value"}>50</div>
+        <div class={"world-point-value"}>100</div>
+        <div class={"world-point-value"}>150</div>
+        <div class={"world-point-value"}>200</div>
+      </div>
+      <br />
+      <br />
+      <h4>Rewards</h4>
+      <br />
+      <div className={"reward-row-icons"}>
+        <IoIosTrophy size={50}
+          className={"reward-icon"}
+        />
+        <IoIosTrophy size={50}
+          className={"reward-icon"}
+        />
+        <IoIosTrophy size={50}
+          className={"reward-icon"}
+        />
+        <IoIosTrophy size={50}
+          className={"reward-icon"}
+        />
+      </div>
     </div>
   );
 }
