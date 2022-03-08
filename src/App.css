@@ -286,6 +286,34 @@ h1 {
   color: #fff;
 }
 
+.reward-price-row{
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  width: 50%;
+}
+
+.reward-price-pairs {
+  white-space: nowrap;
+  text-align: center;
+  display:table-cell;
+  padding: 10px;
+}
+
+.reward-icon {
+  color: gold;
+}
+
+.reward-price{
+  color: black;
+}
+
+.profile-pic {
+  padding: 4px;
+  border-radius: 15px 15px 15px;
+  color: #fff;
+}
+
 #map-button {
   top: 20px;
   left: 25px;

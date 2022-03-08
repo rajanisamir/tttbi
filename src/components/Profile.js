@@ -17,6 +17,8 @@ import {
   onSnapshot,
   increment,
 } from "firebase/firestore";
+import { IoIosTrophy } from "react-icons/io";
+import { IoMdPerson } from "react-icons/io";
 
 function Profile() {
   const [user, setUser] = useState(null);
@@ -88,9 +90,18 @@ function Profile() {
     );
   }
 
+  var reward1 = global.assignmentScore > 25 ? "reward1-show" : "reward1-lock";
+  var reward2 = global.assignmentScore > 75 ? "reward2-show" : "reward2-lock";
+  var reward3 = global.assignmentScore > 125 ? "reward3-show" : "reward3-lock";
+  var reward4 = global.assignmentScore > 175 ? "reward4-show" : "reward4-lock";
+
   return (
     <div>
       <h1>User Profile</h1>
+      <div className={"profile-pic"}>
+            < IoMdPerson size={100} />
+      </div>
+      <br />
       <b>Name: </b> {user ? user.displayName : "Anonymous User"}
       <br />
       <br />
@@ -102,6 +113,37 @@ function Profile() {
       <br />
       <MagicButton />
       {/* <p>Assignment Score: {global.assignmentScore}</p> */}
+      <br />
+      <br />
+      <br />
+      <h4>Rewards</h4>
+      <br />
+      <div className={"reward-price-row"}>
+        <div className={"reward-price-pairs"}>
+          <IoIosTrophy size={70}
+            className={"reward-icon"}
+          />
+          <div className={reward1}>25 points</div>
+        </div>
+        <div className={"reward-price-pairs"}>
+          <IoIosTrophy size={70}
+            className={"reward-icon"}
+          />
+          <div className={reward2}>75 points</div>
+        </div>
+        <div className={"reward-price-pairs"}>
+          <IoIosTrophy size={70}
+            className={"reward-icon"}
+          />
+           <div className={reward3}>125 points</div>
+        </div>
+        <div className={"reward-price-pairs"}>
+          <IoIosTrophy size={70}
+            className={"reward-icon"}
+          />
+          <div className={reward4}>175 points</div>
+        </div>
+      </div>
     </div>
   );
 }
