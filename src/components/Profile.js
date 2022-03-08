@@ -46,7 +46,12 @@ function Profile() {
       }
       const userDocs = await getDocs(userQuery);
       onSnapshot(doc(db, "users", userDocs.docs[0].id), (snapshot) =>
+<<<<<<< HEAD
         setScore(snapshot.data().score)
+=======
+        setScore(snapshot.data().score),
+        global.assignmentScore = score
+>>>>>>> 3dc921efc312e543d9a1ad88fa7f28c8b4b283fc
       );
       setDocRef(doc(db, "users", userDocs.docs[0].id));
     };
@@ -78,6 +83,10 @@ function Profile() {
       <button
         onClick={() => {
           updateDoc(docRef, { score: increment(1) });
+<<<<<<< HEAD
+=======
+          global.assignmentScore = score;
+>>>>>>> 3dc921efc312e543d9a1ad88fa7f28c8b4b283fc
         }}
         className="filter-button"
       >

@@ -42,12 +42,79 @@
 .map-tab {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   width: 80%;
   background: rgba(0, 128, 128, 0.8);
   text-align: center;
   border-radius: 40px;
   padding-bottom: 32px;
+  height: max-content;
+  align-items: center;
+}
+
+.map-view {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  height: 600px;
+  flex-wrap: wrap;
+  width: 400px;
+  align-self: center;
+  justify-content: center;
+  align-content: center;
+}
+
+.map-square1 {
+  height: 250px;
+  width: 250px;
+  background-color: rgb(161, 221, 164);
+  margin: 20px;
+  padding: 40px;
+}
+
+.map-square2 {
+  height: 250px;
+  width: 250px;
+  background-color: rgb(178, 158, 224);
+  margin: 20px;
+  padding: 40px;
+  color: rgb(178, 158, 224);
+}
+
+.map-square3 {
+  height: 250px;
+    width: 250px;
+    background-color: rgb(231, 227, 166);
+    margin: 20px;
+    padding: 40px;
+    color: rgb(231, 227, 166);
+}
+
+.map-square2-lock {
+  height: 250px;
+  width: 250px;
+  background-color: rgb(82, 68, 116);
+  margin: 20px;
+  padding: 40px;
+  color: white;
+}
+
+.map-square2-lock:hover {
+  font-size: larger;
+  background-color: rgb(178, 158, 224);
+}
+
+.map-square3-lock {
+  height: 250px;
+    width: 250px;
+    background-color: rgb(182, 177, 104);
+    margin: 20px;
+    padding: 40px;
+    color: white;
+}
+
+.map-square3-lock:hover {
+  font-size: larger;
+  background-color: rgb(231, 227, 166);
 }
 
 .task-manager-tab {
