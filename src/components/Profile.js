@@ -18,7 +18,6 @@ import {
   increment,
 } from "firebase/firestore";
 import { IoIosTrophy } from "react-icons/io";
-import { IoIosKey } from "react-icons/io";
 import { IoMdPerson } from "react-icons/io";
 
 function Profile() {
@@ -91,6 +90,11 @@ function Profile() {
     );
   }
 
+  var reward1 = global.assignmentScore > 25 ? "reward1-show" : "reward1-lock";
+  var reward2 = global.assignmentScore > 75 ? "reward2-show" : "reward2-lock";
+  var reward3 = global.assignmentScore > 125 ? "reward3-show" : "reward3-lock";
+  var reward4 = global.assignmentScore > 175 ? "reward4-show" : "reward4-lock";
+
   return (
     <div>
       <h1>User Profile</h1>
@@ -111,44 +115,34 @@ function Profile() {
       {/* <p>Assignment Score: {global.assignmentScore}</p> */}
       <br />
       <br />
-      <div className={"world-row-icons"}>
-        <IoIosKey size={70}
-          className={"world-icon"}
-        />
-        <IoIosKey size={70}
-          className={"world-icon"}
-        />
-        <IoIosKey size={70}
-          className={"world-icon"}
-        />
-        <IoIosKey size={70}
-          className={"world-icon"}
-        />
-      </div>
-      <br />
-      <div className={"world-point-row-values"}>
-        <div class={"world-point-value"}>50</div>
-        <div class={"world-point-value"}>100</div>
-        <div class={"world-point-value"}>150</div>
-        <div class={"world-point-value"}>200</div>
-      </div>
-      <br />
       <br />
       <h4>Rewards</h4>
       <br />
-      <div className={"reward-row-icons"}>
-        <IoIosTrophy size={50}
-          className={"reward-icon"}
-        />
-        <IoIosTrophy size={50}
-          className={"reward-icon"}
-        />
-        <IoIosTrophy size={50}
-          className={"reward-icon"}
-        />
-        <IoIosTrophy size={50}
-          className={"reward-icon"}
-        />
+      <div className={"reward-price-row"}>
+        <div className={"reward-price-pairs"}>
+          <IoIosTrophy size={70}
+            className={"reward-icon"}
+          />
+          <div className={reward1}>25 points</div>
+        </div>
+        <div className={"reward-price-pairs"}>
+          <IoIosTrophy size={70}
+            className={"reward-icon"}
+          />
+          <div className={reward2}>75 points</div>
+        </div>
+        <div className={"reward-price-pairs"}>
+          <IoIosTrophy size={70}
+            className={"reward-icon"}
+          />
+           <div className={reward3}>125 points</div>
+        </div>
+        <div className={"reward-price-pairs"}>
+          <IoIosTrophy size={70}
+            className={"reward-icon"}
+          />
+          <div className={reward4}>175 points</div>
+        </div>
       </div>
     </div>
   );
