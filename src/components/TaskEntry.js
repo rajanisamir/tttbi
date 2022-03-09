@@ -39,11 +39,10 @@ function TaskEntry({ onSubmit, categoryNames }) {
     const dateString = task.due
       ? moment(task.due).format("MMM DD, hh:mm a")
       : "";
-    const courseString =
-      task.course != null
-        ? "[" + task.course.substring(0, 10) + "]"
-        : "[Personal]";
-    task.string = dateString + " " + courseString + " " + task.text;
+    
+    // PRIORITY TO BE IMPLEMENTED
+    // task.string = dateString + " " + task.course + " " + task.text + " (" + task.priority + ")";
+    task.string = dateString + " " + task.course + " " + task.text;
     // REDO ID
     onSubmit(task);
 

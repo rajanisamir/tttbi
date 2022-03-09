@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import TaskEntry from "./TaskEntry";
 import TaskList from "./TaskList";
 
-function TaskManager({ tasks, setTasks }) {
+function TaskManager({ tasks, setTasks, courses }) {
   const addTask = (task) => {
     if (!task.text || /^\s*$/.test(task.text)) {
       return;
     }
+    console.log(task.course,courses);
+    task.courseIndex = courses.indexOf(task.course);
     const newTasks = [task, ...tasks];
     setTasks(newTasks);
   };

@@ -12,6 +12,7 @@ import moment from "moment";
 function App() {
   const [currentMenu, setCurrentMenu] = useState("None");
   const [tasks, setTasks] = useState([]);
+  let [courses, setCourses] = useState([]);
 
   useEffect(() => {
     const url =
@@ -27,36 +28,34 @@ function App() {
       ).assignments;
       console.log(json);
       let assignments = [];
-      let courses = [];
       json.forEach((assignment) => {
-        if (!courses.includes(assignment.Course)) {
-          courses = [...courses, assignment.Course];
+        const courseString = assignment.Course ? "[" + assignment.Course.substring(0, 10) + "]" : "";
+        if (!courses.includes(courseString)) {
+          courses = [...courses, courseString];
         }
         const newAssignment = {
           due: assignment.Due,
-          course: assignment.Course,
+          course: courseString,
           text: assignment.Name,
           id: assignment.ID,
           custom: false,
-          courseIndex: courses.indexOf(assignment.Course),
+          courseIndex: courses.indexOf(courseString),
           string: "",
         };
         newAssignment.due = newAssignment.due
           ? moment(newAssignment.due).format("MMM DD, hh:mm a")
           : "";
-        newAssignment.course =
-          newAssignment.course != null
-            ? "[" + newAssignment.course.substring(0, 10) + "]"
-            : "";
-        newAssignment.string =
-          newAssignment.due +
-          " " +
-          newAssignment.course +
-          " " +
-          newAssignment.text;
+        // PRIORITY TO BE IMPLEMENTED
+        // newAssignment.priority = (newAssignment.text.toLowerCase().includes('project') 
+        //                       || newAssignment.text.toLowerCase().includes('exam') 
+        //                       || newAssignment.text.toLowerCase().includes('midterm')) 
+        //                       ? 'High Priority' : 'Medium Priority';
+        // newAssignment.string = newAssignment.due + " " + newAssignment.course + " " + newAssignment.text + " (" + newAssignment.priority + ")";
+        newAssignment.string = newAssignment.due + " " + newAssignment.course + " " + newAssignment.text;
         assignments = [newAssignment, ...assignments];
       });
       setTasks((tasks) => [...assignments, ...tasks]);
+      setCourses((courses));
     };
 
     fetchData();
@@ -72,7 +71,7 @@ function App() {
               display: currentMenu === "Tasks" ? "block" : "none",
             }}
           >
-            <TaskManager tasks={tasks} setTasks={setTasks} />
+            <TaskManager tasks={tasks} setTasks={setTasks} courses={courses} />
           </div>
         }
         {
