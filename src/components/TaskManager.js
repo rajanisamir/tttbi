@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import TaskEntry from "./TaskEntry";
 import TaskList from "./TaskList";
 
@@ -31,10 +31,15 @@ function TaskManager({ tasks, setTasks }) {
     setTasks(updatedTasks);
   };
 
+  const [categoryNames, setCategoryNames] = useState([
+    "All Categories",
+    "Personal",
+  ]);
+
   return (
     <div style={{ overflow: "scroll", maxHeight: 0.75 * window.innerHeight }}>
       <h1>Your Tasks</h1>
-      <TaskEntry onSubmit={addTask} />
+      <TaskEntry onSubmit={addTask} categoryNames={categoryNames} />
       <TaskList
         tasks={tasks}
         setTasks={setTasks}
@@ -42,6 +47,8 @@ function TaskManager({ tasks, setTasks }) {
         removeTask={removeTask}
         updateTask={updateTask}
         onSubmit={addTask}
+        categoryNames={categoryNames}
+        setCategoryNames={setCategoryNames}
       />
     </div>
   );

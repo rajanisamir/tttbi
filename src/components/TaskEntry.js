@@ -1,9 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import moment from "moment";
 
-function TaskEntry({ onSubmit }) {
+function TaskEntry({ onSubmit, categoryNames }) {
   const [input, setInput] = useState("");
   const [dateInput, setDateInput] = useState("");
+  const [categoryInput, setCategoryInput] = useState("All Categories");
+
+  const onCategoryInput = (event) => {
+    setCategoryInput(event.target.value);
+  };
 
   const inputRef = useRef(null);
 
@@ -28,6 +33,7 @@ function TaskEntry({ onSubmit }) {
       custom: true,
       due: dateInput,
       string: "",
+      course: categoryInput,
     };
 
     const dateString = task.due
@@ -55,13 +61,21 @@ function TaskEntry({ onSubmit }) {
         onChange={handleChange}
         ref={inputRef}
       />
-      <button className="task-input-submit">Add Task</button>
+      
       <input
         type="date"
         name="due-date"
         className="task-date-input"
         onChange={handleDateChange}
       />
+
+      <select className="category-select" onChange={onCategoryInput} >
+        {categoryNames.map((option) => (
+          <option value={option}>{option}</option>
+        ))}
+      </select>
+
+      <button className="task-input-submit">Add Task</button>
     </form>
   );
 }

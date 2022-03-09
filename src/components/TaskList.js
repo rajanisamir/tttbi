@@ -3,12 +3,8 @@ import TaskListItem from "./TaskListItem";
 import { IoMdArrowRoundDown, IoMdArrowRoundUp } from "react-icons/io";
 import moment from "moment";
 
-function TaskList({ tasks, completeTask, removeTask, updateTask }) {
+function TaskList({ tasks, completeTask, removeTask, updateTask, categoryNames, setCategoryNames }) {
   const [filterDate, setFilterDate] = useState(true);
-  const [categoryNames, setCategoryNames] = useState([
-    "All Categories",
-    "Personal",
-  ]);
   const [filterOption, setFilterOption] = useState("All Categories");
 
   const sortTasks = (descending, taskList) => {
@@ -54,7 +50,7 @@ function TaskList({ tasks, completeTask, removeTask, updateTask }) {
         setCategoryNames([...categoryNames, taskCategory]);
       }
     });
-  }, [tasks, categoryNames]);
+  }, [tasks, categoryNames, setCategoryNames]);
 
   function onFilterDate() {
     setFilterDate(!filterDate);
