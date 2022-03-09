@@ -35,7 +35,7 @@ function TaskManager({ tasks, setTasks, courses }) {
 
   const [categoryNames, setCategoryNames] = useState([
     "All Categories",
-    "Personal",
+    "[Personal]",
   ]);
 
   return (
