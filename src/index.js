@@ -14,7 +14,7 @@ const firebaseConfig = {
   measurementId: "G-3K8C1K8S2D",
 };
 
-const app = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 ReactDOM.render(
   <React.StrictMode>

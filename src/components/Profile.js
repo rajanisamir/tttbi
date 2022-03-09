@@ -51,7 +51,7 @@ function Profile() {
       }
       const userDocs = await getDocs(userQuery);
       onSnapshot(doc(db, "users", userDocs.docs[0].id), (snapshot) =>
-        setScore(snapshot.data().score),
+        setScore(snapshot.data().score)
       );
       setDocRef(doc(db, "users", userDocs.docs[0].id));
       // initScore();
@@ -104,17 +104,23 @@ function Profile() {
   var reward4 = global.assignmentScore > 175 ? "reward4-show" : "reward4-lock";
 
   // global.assignmentScore = score;
-  
+
   return (
     <div className="profile-view">
       <h1>User Profile</h1>
       <div className="user">
         <div className={"profile-pic"}>
-              < IoMdPerson size={100} />
+          <IoMdPerson size={100} />
         </div>
         <div className="user-info">
-          <a><b>Name: </b>{global.username ? global.username : (user ? user.displayName : "Anonymous User")}</a>
-          <a><b>Score: </b>{global.assignmentScore === -1 ? "..." : global.assignmentScore}</a> 
+          <b>Name: </b>
+          {global.username
+            ? global.username
+            : user
+            ? user.displayName
+            : "Anonymous User"}
+          <b>Score: </b>
+          {global.assignmentScore === -1 ? "..." : global.assignmentScore}
         </div>
       </div>
       <div className="profile-buttons">
@@ -125,22 +131,34 @@ function Profile() {
       <br />
       <div className={"reward-price-row"}>
         <div className={"reward-price-pairs"}>
-          <IoIosTrophy  className={global.assignmentScore > 175 ? "reward-icon1-w" : "reward-icon1"}
+          <IoIosTrophy
+            className={
+              global.assignmentScore > 175 ? "reward-icon1-w" : "reward-icon1"
+            }
           />
           <div className={reward1}>175 points</div>
         </div>
         <div className={"reward-price-pairs"}>
-          <IoIosTrophy className={global.assignmentScore > 125 ? "reward-icon2-w" : "reward-icon2"}
+          <IoIosTrophy
+            className={
+              global.assignmentScore > 125 ? "reward-icon2-w" : "reward-icon2"
+            }
           />
           <div className={reward2}>125 points</div>
         </div>
         <div className={"reward-price-pairs"}>
-          <IoIosTrophy className={global.assignmentScore > 75 ? "reward-icon3-w" : "reward-icon3"}
+          <IoIosTrophy
+            className={
+              global.assignmentScore > 75 ? "reward-icon3-w" : "reward-icon3"
+            }
           />
-           <div className={reward3}>75 points</div>
+          <div className={reward3}>75 points</div>
         </div>
         <div className={"reward-price-pairs"}>
-          <IoIosTrophy className={global.assignmentScore > 25 ? "reward-icon4-w" : "reward-icon4"}
+          <IoIosTrophy
+            className={
+              global.assignmentScore > 25 ? "reward-icon4-w" : "reward-icon4"
+            }
           />
           <div className={reward4}>25 points</div>
         </div>

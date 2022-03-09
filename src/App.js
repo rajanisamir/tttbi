@@ -12,7 +12,7 @@ import moment from "moment";
 function App() {
   const [currentMenu, setCurrentMenu] = useState("None");
   const [tasks, setTasks] = useState([]);
-  let [courses, setCourses] = useState([]);
+  const [courses, setCourses] = useState([]);
 
   useEffect(() => {
     const url =
@@ -28,10 +28,13 @@ function App() {
       ).assignments;
       console.log(json);
       let assignments = [];
+      let courseList = [];
       json.forEach((assignment) => {
-        const courseString = assignment.Course ? "[" + assignment.Course.substring(0, 10) + "]" : "";
-        if (!courses.includes(courseString)) {
-          courses = [...courses, courseString];
+        const courseString = assignment.Course
+          ? "[" + assignment.Course.substring(0, 10) + "]"
+          : "";
+        if (!courseList.includes(courseString)) {
+          courseList = [...courseList, courseString];
         }
         const newAssignment = {
           due: assignment.Due,
@@ -39,23 +42,28 @@ function App() {
           text: assignment.Name,
           id: assignment.ID,
           custom: false,
-          courseIndex: courses.indexOf(courseString),
+          courseIndex: courseList.indexOf(courseString),
           string: "",
         };
         newAssignment.due = newAssignment.due
           ? moment(newAssignment.due).format("MMM DD, hh:mm a")
           : "";
         // PRIORITY TO BE IMPLEMENTED
-        // newAssignment.priority = (newAssignment.text.toLowerCase().includes('project') 
-        //                       || newAssignment.text.toLowerCase().includes('exam') 
-        //                       || newAssignment.text.toLowerCase().includes('midterm')) 
+        // newAssignment.priority = (newAssignment.text.toLowerCase().includes('project')
+        //                       || newAssignment.text.toLowerCase().includes('exam')
+        //                       || newAssignment.text.toLowerCase().includes('midterm'))
         //                       ? 'High Priority' : 'Medium Priority';
         // newAssignment.string = newAssignment.due + " " + newAssignment.course + " " + newAssignment.text + " (" + newAssignment.priority + ")";
-        newAssignment.string = newAssignment.due + " " + newAssignment.course + " " + newAssignment.text;
+        newAssignment.string =
+          newAssignment.due +
+          " " +
+          newAssignment.course +
+          " " +
+          newAssignment.text;
         assignments = [newAssignment, ...assignments];
       });
       setTasks((tasks) => [...assignments, ...tasks]);
-      setCourses((courses));
+      setCourses(courseList);
     };
 
     fetchData();

@@ -4,7 +4,7 @@ import moment from "moment";
 function TaskEntry({ onSubmit, categoryNames }) {
   const [input, setInput] = useState("");
   const [dateInput, setDateInput] = useState("");
-  const [categoryInput, setCategoryInput] = useState("");
+  const [categoryInput, setCategoryInput] = useState("[Personal]");
 
   const categories = categoryNames.filter((c) => c !== "All Categories");
 
@@ -41,7 +41,7 @@ function TaskEntry({ onSubmit, categoryNames }) {
     const dateString = task.due
       ? moment(task.due).format("MMM DD, hh:mm a")
       : "";
-    
+
     // PRIORITY TO BE IMPLEMENTED
     // task.string = dateString + " " + task.course + " " + task.text + " (" + task.priority + ")";
     task.string = dateString + " " + task.course + " " + task.text;
@@ -62,7 +62,7 @@ function TaskEntry({ onSubmit, categoryNames }) {
         onChange={handleChange}
         ref={inputRef}
       />
-      
+
       <input
         type="date"
         name="due-date"
@@ -70,8 +70,8 @@ function TaskEntry({ onSubmit, categoryNames }) {
         onChange={handleDateChange}
       />
 
-      <select className="category-select" onChange={onCategoryInput} >
-        <option selected disabled>Category</option>
+      <select className="category-select" onChange={onCategoryInput}>
+        <option disabled>Category</option>
         {categories.map((option) => (
           <option value={option}>{option}</option>
         ))}
