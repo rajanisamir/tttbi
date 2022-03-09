@@ -1223,7 +1223,6 @@ class VRScene extends React.Component {
         <Entity
           primitive="a-camera"
           id="rig"
-          position="0 3 0"
           cursor="rayOrigin: mouse"
         >
           {" "}
