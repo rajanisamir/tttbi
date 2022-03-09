@@ -65,21 +65,36 @@ function App() {
   return (
     <div>
       <div className="main-view">
-        {currentMenu === "Tasks" && (
-          <div className="task-manager-tab">
+        {
+          <div
+            className="task-manager-tab"
+            style={{
+              display: currentMenu === "Tasks" ? "block" : "none",
+            }}
+          >
             <TaskManager tasks={tasks} setTasks={setTasks} />
           </div>
-        )}
-        {currentMenu === "Profile" && (
-          <div className="profile-tab">
+        }
+        {
+          <div
+            className="profile-tab"
+            style={{
+              display: currentMenu === "Profile" ? "block" : "none",
+            }}
+          >
             <Profile />
           </div>
-        )}
-        {currentMenu === "Map" && (
-          <div className="map-tab">
+        }
+        {
+          <div
+            className="map-tab"
+            style={{
+              display: currentMenu === "Map" ? "block" : "none",
+            }}
+          >
             <Map />
           </div>
-        )}
+        }
       </div>
       <div>
         <MdOutlineMap
