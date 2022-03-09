@@ -62,16 +62,18 @@ function TaskList({ tasks, completeTask, removeTask, updateTask, categoryNames, 
 
   return (
     <>
-      <button className="filter-button" onClick={onFilterDate}>
-        Date &nbsp;
-        {filterDate ? <IoMdArrowRoundDown /> : <IoMdArrowRoundUp />}
-      </button>
-      &nbsp;&nbsp;
-      <select className="filter-button" onChange={onFilterCategories}>
-        {categoryNames.map((option) => (
-          <option value={option}>{option}</option>
-        ))}
-      </select>
+      <div className="filter">
+        <button className="filter-button" onClick={onFilterDate}>
+          Date &nbsp;
+          {filterDate ? <IoMdArrowRoundDown /> : <IoMdArrowRoundUp />}
+        </button>
+        &nbsp;&nbsp;
+        <select className="filter-button" onChange={onFilterCategories}>
+          {categoryNames.map((option) => (
+            <option value={option}>{option}</option>
+          ))}
+        </select>
+      </div>
       {sortTasks(filterDate, getFilteredTasks()).map((task, index) => (
         <TaskListItem
           task={task}

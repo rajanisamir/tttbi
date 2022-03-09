@@ -113,14 +113,14 @@ function Profile() {
           <IoMdPerson size={100} />
         </div>
         <div className="user-info">
-          <b>Name: </b>
+          <a><b>Name: </b>
           {global.username
             ? global.username
             : user
             ? user.displayName
-            : "Anonymous User"}
-          <b>Score: </b>
-          {global.assignmentScore === -1 ? "..." : global.assignmentScore}
+            : "Anonymous User"}</a>
+          <a><b>Score: </b>
+          {global.assignmentScore === -1 ? "..." : global.assignmentScore}</a>
         </div>
       </div>
       <div className="profile-buttons">

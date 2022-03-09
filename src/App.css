@@ -58,7 +58,6 @@
   text-align: center;
   height: 600px;
   flex-wrap: wrap;
-  width: 400px;
   align-self: center;
   justify-content: center;
   align-content: center;
@@ -287,6 +286,12 @@ h1 {
   font-size: 45px;
   position: absolute;
   color: #fff;
+}
+
+.filter-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .filter-button {
