@@ -89,6 +89,7 @@ function App() {
                 setTasks={setTasks}
                 courses={courses}
                 docRef={docRef}
+                score={score}
               />
             </div>
           }

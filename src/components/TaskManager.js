@@ -3,7 +3,7 @@ import TaskEntry from "./TaskEntry";
 import TaskList from "./TaskList";
 import { updateDoc, increment } from "firebase/firestore";
 
-function TaskManager({ tasks, setTasks, courses, docRef }) {
+function TaskManager({ tasks, setTasks, courses, docRef, score }) {
   const addTask = (task) => {
     if (!task.text || /^\s*$/.test(task.text)) {
       return;
@@ -32,8 +32,10 @@ function TaskManager({ tasks, setTasks, courses, docRef }) {
       }
       return task;
     });
-    updateDoc(docRef, { score: custom ? increment(2) : increment(5) });
     setTasks(updatedTasks);
+    if (score !== -1) {
+      updateDoc(docRef, { score: custom ? increment(2) : increment(5) });
+    }
   };
 
   const [categoryNames, setCategoryNames] = useState([
