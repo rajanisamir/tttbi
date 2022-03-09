@@ -45,13 +45,16 @@ function Profile() {
           email: result.user.email,
           score: 0,
         });
+        if (user) {
+          global.username = user.displayName;
+        }
       }
       const userDocs = await getDocs(userQuery);
       onSnapshot(doc(db, "users", userDocs.docs[0].id), (snapshot) =>
         setScore(snapshot.data().score),
-        global.assignmentScore = score
       );
       setDocRef(doc(db, "users", userDocs.docs[0].id));
+      // initScore();
     };
     return (
       <button className="filter-button" onClick={signInWithGoogle}>
@@ -68,7 +71,7 @@ function Profile() {
           setUser(auth.currentUser);
           setScore(-1);
         }}
-        className="filter-button"
+        className="sign-in-out"
       >
         Sign Out
       </button>
@@ -83,65 +86,63 @@ function Profile() {
           updateDoc(docRef, { score: increment(1) });
           global.assignmentScore = score;
         }}
-        className="filter-button"
+        className="sign-in-out"
       >
         Free points!
       </button>
     );
   }
 
+  // function initScore() {
+  //   updateDoc(docRef, { score: increment(0) });
+  //   global.assignmentScore = score;
+  // }
+
   var reward1 = global.assignmentScore > 25 ? "reward1-show" : "reward1-lock";
   var reward2 = global.assignmentScore > 75 ? "reward2-show" : "reward2-lock";
   var reward3 = global.assignmentScore > 125 ? "reward3-show" : "reward3-lock";
   var reward4 = global.assignmentScore > 175 ? "reward4-show" : "reward4-lock";
 
+  // global.assignmentScore = score;
+  
   return (
-    <div>
+    <div className="profile-view">
       <h1>User Profile</h1>
-      <div className={"profile-pic"}>
-            < IoMdPerson size={100} />
+      <div className="user">
+        <div className={"profile-pic"}>
+              < IoMdPerson size={100} />
+        </div>
+        <div className="user-info">
+          <a><b>Name: </b>{global.username ? global.username : (user ? user.displayName : "Anonymous User")}</a>
+          <a><b>Score: </b>{global.assignmentScore === -1 ? "..." : global.assignmentScore}</a> 
+        </div>
       </div>
-      <br />
-      <b>Name: </b> {user ? user.displayName : "Anonymous User"}
-      <br />
-      <br />
-      <b>Score: </b> {score === -1 ? "..." : score}
-      <br />
-      <br />
-      {user ? <SignOut /> : <SignIn />}
-      <br />
-      <br />
-      <MagicButton />
-      {/* <p>Assignment Score: {global.assignmentScore}</p> */}
-      <br />
-      <br />
-      <br />
-      <h4>Rewards</h4>
+      <div className="profile-buttons">
+        {user ? <SignOut /> : <SignIn />}
+        <MagicButton />
+      </div>
+      <h2>Rewards</h2>
       <br />
       <div className={"reward-price-row"}>
         <div className={"reward-price-pairs"}>
-          <IoIosTrophy size={70}
-            className={"reward-icon"}
+          <IoIosTrophy  className={global.assignmentScore > 175 ? "reward-icon1-w" : "reward-icon1"}
           />
-          <div className={reward1}>25 points</div>
+          <div className={reward1}>175 points</div>
         </div>
         <div className={"reward-price-pairs"}>
-          <IoIosTrophy size={70}
-            className={"reward-icon"}
+          <IoIosTrophy className={global.assignmentScore > 125 ? "reward-icon2-w" : "reward-icon2"}
           />
-          <div className={reward2}>75 points</div>
+          <div className={reward2}>125 points</div>
         </div>
         <div className={"reward-price-pairs"}>
-          <IoIosTrophy size={70}
-            className={"reward-icon"}
+          <IoIosTrophy className={global.assignmentScore > 75 ? "reward-icon3-w" : "reward-icon3"}
           />
-           <div className={reward3}>125 points</div>
+           <div className={reward3}>75 points</div>
         </div>
         <div className={"reward-price-pairs"}>
-          <IoIosTrophy size={70}
-            className={"reward-icon"}
+          <IoIosTrophy className={global.assignmentScore > 25 ? "reward-icon4-w" : "reward-icon4"}
           />
-          <div className={reward4}>175 points</div>
+          <div className={reward4}>25 points</div>
         </div>
       </div>
     </div>

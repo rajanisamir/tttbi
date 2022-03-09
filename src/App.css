@@ -37,6 +37,7 @@
   text-align: center;
   border-radius: 40px;
   padding-bottom: 32px;
+  color: white;
 }
 
 .map-tab {
@@ -286,6 +287,54 @@ h1 {
   color: #fff;
 }
 
+.profile-view {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.user {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  color: #b6bcdd;
+  font-size: larger;
+}
+
+.user-info b{
+  font-size: x-large;
+    font-weight: 700;
+    color: #8d94ba;
+}
+
+.profile-buttons {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.sign-in-out {
+  padding: 16px;
+  border: none;
+  border-radius: 15px 15px 15px;
+  cursor: pointer;
+  outline: none;
+  background: #8d94ba;
+  color: #fff;
+  margin: 5px;
+}
+
 .reward-price-row{
   display: flex;
   justify-content: center;
@@ -300,18 +349,74 @@ h1 {
   padding: 10px;
 }
 
-.reward-icon {
-  color: gold;
+.reward-icon1 {
+  color: rgb(219, 200, 89);
+  font-size: 70px;
+}
+.reward-icon1:hover {
+  color: rgb(240, 222, 122);
+  font-size: 80px;
+}
+
+.reward-icon1-w {
+  color: rgb(219, 200, 89);
+  font-size: 100px;
+  border: solid;
+}
+
+.reward-icon2 {
+  color: silver;
+  font-size: 70px;
+}
+.reward-icon2:hover {
+  color: rgb(214, 211, 211);
+  font-size: 80px;
+}
+
+.reward-icon2-w {
+  color: silver;
+  font-size: 100px;
+  border: solid;
+}
+
+.reward-icon3 {
+  color: rosybrown;
+  font-size: 70px;
+}
+.reward-icon3:hover {
+  color: rgb(216, 170, 170);
+  font-size: 80px;
+}
+
+.reward-icon3-w {
+  color: rosybrown;
+  font-size: 100px;
+  border: solid;
+}
+
+.reward-icon4 {
+  color: gray;
+  font-size: 70px;
+}
+.reward-icon4:hover {
+  color: rgb(161, 160, 160);
+  font-size: 80px;
+}
+
+.reward-icon4-w {
+  color: gray;
+  font-size: 100px;
+  border: solid;
 }
 
 .reward-price{
-  color: black;
+  color: rgb(255, 255, 255);
 }
 
 .profile-pic {
   padding: 4px;
   border-radius: 15px 15px 15px;
-  color: #fff;
+  color: #8d94ba;
 }
 
 #map-button {
