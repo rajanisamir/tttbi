@@ -89,21 +89,21 @@ class VRScene extends React.Component {
     };
   })();
 
-  handleWorlds = () => {
-    var scene = document.querySelector("#scene");
-    var world2 = scene.querySelector("#world2");
-    if (this.props.score >= 25) {
-      world2.setAttribute("visible", "true");
-    } else {
-      world2.setAttribute("visible", "false");
-    }
-    var world3 = scene.querySelector("#world3");
-    if (this.props.score >= 75) {
-      world3.setAttribute("visible", "true");
-    } else {
-      world3.setAttribute("visible", "false");
-    }
-  };
+  // handleWorlds = () => {
+  //   var scene = document.querySelector("#scene");
+  //   var world2 = scene.querySelector("#world2");
+  //   if (this.props.score >= 25) {
+  //     world2.setAttribute("visible", "true");
+  //   } else {
+  //     world2.setAttribute("visible", "false");
+  //   }
+  //   var world3 = scene.querySelector("#world3");
+  //   if (this.props.score >= 75) {
+  //     world3.setAttribute("visible", "true");
+  //   } else {
+  //     world3.setAttribute("visible", "false");
+  //   }
+  // };
 
   render() {
     let tree_colors = [
@@ -146,7 +146,7 @@ class VRScene extends React.Component {
     return (
       <Scene
         id="scene"
-        events={{ click: this.handleWorlds }}
+        // events={{ click: this.handleWorlds }}
         shadow="type: pcfsoft"
         fog="type: exponential; density: 0.015; color: #7BC8A4"
       >
@@ -521,7 +521,7 @@ class VRScene extends React.Component {
             />
           </Entity>
         </Entity>
-        <Entity id="world2" visible="false" position="0 0 -50">
+        <Entity id="world2" visible={this.props.score >= 25 ? "true" : "false"} position="0 0 -50">
           <Entity
             primitive="a-plane"
             position="0 0 -54"
@@ -846,7 +846,7 @@ class VRScene extends React.Component {
             />
           </Entity>
         </Entity>
-        <Entity id="world3" visible="false" position="100 0 -30">
+        <Entity id="world3" visible={this.props.score >= 112 ? "true" : "false"} position="100 0 -30">
           <Entity
             primitive="a-plane"
             position="0 0 -34"
