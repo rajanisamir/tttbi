@@ -72,9 +72,9 @@ function TaskEntry({ onSubmit, categoryNames }) {
       />
 
       <select className="category-select" onChange={onCategoryInput}>
-        <option disabled>Category</option>
+        {/* <option style={{background: '#8d94ba' }}>No Category</option> */}
         {categories.map((option) => (
-          <option value={option}>{option}</option>
+          <option style={{background: '#8d94ba' }}value={option}>{option}</option>
         ))}
       </select>
 
