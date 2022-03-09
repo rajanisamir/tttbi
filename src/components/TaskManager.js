@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import TaskEntry from "./TaskEntry";
 import TaskList from "./TaskList";
+import { updateDoc, increment } from "firebase/firestore";
 
-function TaskManager({ tasks, setTasks, courses }) {
+function TaskManager({ tasks, setTasks, courses, docRef }) {
   const addTask = (task) => {
     if (!task.text || /^\s*$/.test(task.text)) {
       return;
@@ -23,12 +24,15 @@ function TaskManager({ tasks, setTasks, courses }) {
   };
 
   const completeTask = (id) => {
+    let custom;
     let updatedTasks = tasks.map((task) => {
       if (task.id === id) {
         task.isComplete = !task.isComplete;
+        custom = task.custom ? true : false;
       }
       return task;
     });
+    updateDoc(docRef, { score: custom ? increment(2) : increment(5) });
     setTasks(updatedTasks);
   };
 

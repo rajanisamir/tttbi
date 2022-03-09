@@ -3,14 +3,21 @@ import TaskListItem from "./TaskListItem";
 import { IoMdArrowRoundDown, IoMdArrowRoundUp } from "react-icons/io";
 import moment from "moment";
 
-function TaskList({ tasks, completeTask, removeTask, updateTask, categoryNames, setCategoryNames }) {
+function TaskList({
+  tasks,
+  completeTask,
+  removeTask,
+  updateTask,
+  categoryNames,
+  setCategoryNames,
+}) {
   const [filterDate, setFilterDate] = useState(true);
   const [filterOption, setFilterOption] = useState("All Categories");
 
   const sortTasks = (descending, taskList) => {
     // todo keeps track of items without deadlines.
     const todo = taskList.filter((task) => !task.due);
-    
+
     // sortedTasks is a sorted list of tasks
     var sortedTasks = [];
     if (descending) {
@@ -20,8 +27,10 @@ function TaskList({ tasks, completeTask, removeTask, updateTask, categoryNames, 
     }
 
     // currTasks contains only tasks whose deadlines have not passed
-    const currTasks = sortedTasks.filter((task) => moment(task.due,"MMM DD, hh:mm a") > moment());
-    
+    const currTasks = sortedTasks.filter(
+      (task) => moment(task.due, "MMM DD, hh:mm a") > moment()
+    );
+
     // global.assignmentScore = (taskList.length - currTasks.length) * 5;
     // shouldn't really be doing it this way...
 
@@ -33,9 +42,7 @@ function TaskList({ tasks, completeTask, removeTask, updateTask, categoryNames, 
       return tasks;
     } else {
       return tasks.filter((task) => {
-        const taskName = task.course
-          ? task.course
-          : "Personal";
+        const taskName = task.course ? task.course : "Personal";
         return taskName === filterOption;
       });
     }
@@ -43,9 +50,7 @@ function TaskList({ tasks, completeTask, removeTask, updateTask, categoryNames, 
 
   useEffect(() => {
     tasks.forEach((task) => {
-      const taskCategory = task.course
-        ? task.course
-        : "Personal";
+      const taskCategory = task.course ? task.course : "Personal";
       if (categoryNames.indexOf(taskCategory) === -1) {
         setCategoryNames([...categoryNames, taskCategory]);
       }

@@ -13,17 +13,13 @@ import {
   where,
   getDocs,
   addDoc,
-  updateDoc,
   onSnapshot,
-  increment,
 } from "firebase/firestore";
 import { IoIosTrophy } from "react-icons/io";
 import { IoMdPerson } from "react-icons/io";
 
-function Profile() {
+function Profile({ score, setScore, docRef, setDocRef }) {
   const [user, setUser] = useState(null);
-  const [score, setScore] = useState(-1);
-  const [docRef, setDocRef] = useState(null);
 
   const auth = getAuth();
   const db = getFirestore();
@@ -45,16 +41,13 @@ function Profile() {
           email: result.user.email,
           score: 0,
         });
-        if (user) {
-          global.username = user.displayName;
-        }
       }
       const userDocs = await getDocs(userQuery);
       onSnapshot(doc(db, "users", userDocs.docs[0].id), (snapshot) =>
         setScore(snapshot.data().score)
       );
       setDocRef(doc(db, "users", userDocs.docs[0].id));
-      // initScore();
+      setScore(userDocs.docs[0].data().score);
     };
     return (
       <button className="filter-button" onClick={signInWithGoogle}>
@@ -78,32 +71,10 @@ function Profile() {
     );
   }
 
-  // For testing functionality...
-  function MagicButton() {
-    return (
-      <button
-        onClick={() => {
-          updateDoc(docRef, { score: increment(1) });
-          global.assignmentScore = score;
-        }}
-        className="sign-in-out"
-      >
-        Free points!
-      </button>
-    );
-  }
-
-  // function initScore() {
-  //   updateDoc(docRef, { score: increment(0) });
-  //   global.assignmentScore = score;
-  // }
-
-  var reward1 = global.assignmentScore > 25 ? "reward1-show" : "reward1-lock";
-  var reward2 = global.assignmentScore > 75 ? "reward2-show" : "reward2-lock";
-  var reward3 = global.assignmentScore > 125 ? "reward3-show" : "reward3-lock";
-  var reward4 = global.assignmentScore > 175 ? "reward4-show" : "reward4-lock";
-
-  // global.assignmentScore = score;
+  var reward1 = score >= 25 ? "reward1-show" : "reward1-lock";
+  var reward2 = score >= 75 ? "reward2-show" : "reward2-lock";
+  var reward3 = score >= 125 ? "reward3-show" : "reward3-lock";
+  var reward4 = score >= 175 ? "reward4-show" : "reward4-lock";
 
   return (
     <div className="profile-view">
@@ -113,52 +84,41 @@ function Profile() {
           <IoMdPerson size={100} />
         </div>
         <div className="user-info">
-          <a><b>Name: </b>
-          {global.username
-            ? global.username
-            : user
-            ? user.displayName
-            : "Anonymous User"}</a>
-          <a><b>Score: </b>
-          {global.assignmentScore === -1 ? "..." : global.assignmentScore}</a>
+          <p>
+            <b>Name: </b>
+            {user ? user.displayName : "Anonymous User"}
+          </p>
+          <p>
+            <b>Score: </b>
+            {score === -1 ? "..." : score}
+          </p>
         </div>
       </div>
-      <div className="profile-buttons">
-        {user ? <SignOut /> : <SignIn />}
-        <MagicButton />
-      </div>
+      <div className="profile-buttons">{user ? <SignOut /> : <SignIn />}</div>
       <h2>Rewards</h2>
       <br />
       <div className={"reward-price-row"}>
         <div className={"reward-price-pairs"}>
           <IoIosTrophy
-            className={
-              global.assignmentScore > 175 ? "reward-icon1-w" : "reward-icon1"
-            }
+            className={score >= 175 ? "reward-icon1-w" : "reward-icon1"}
           />
           <div className={reward1}>175 points</div>
         </div>
         <div className={"reward-price-pairs"}>
           <IoIosTrophy
-            className={
-              global.assignmentScore > 125 ? "reward-icon2-w" : "reward-icon2"
-            }
+            className={score >= 125 ? "reward-icon2-w" : "reward-icon2"}
           />
           <div className={reward2}>125 points</div>
         </div>
         <div className={"reward-price-pairs"}>
           <IoIosTrophy
-            className={
-              global.assignmentScore > 75 ? "reward-icon3-w" : "reward-icon3"
-            }
+            className={score >= 75 ? "reward-icon3-w" : "reward-icon3"}
           />
           <div className={reward3}>75 points</div>
         </div>
         <div className={"reward-price-pairs"}>
           <IoIosTrophy
-            className={
-              global.assignmentScore > 25 ? "reward-icon4-w" : "reward-icon4"
-            }
+            className={score >= 25 ? "reward-icon4-w" : "reward-icon4"}
           />
           <div className={reward4}>25 points</div>
         </div>

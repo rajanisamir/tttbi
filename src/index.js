@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import VRScene from "./components/VRScene";
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
@@ -18,7 +17,6 @@ initializeApp(firebaseConfig);
 
 ReactDOM.render(
   <React.StrictMode>
-    <VRScene />
     <App />
   </React.StrictMode>,
   document.getElementById("root")

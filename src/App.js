@@ -8,11 +8,14 @@ import { MdOutlineMap } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { MdOutlineAssignment } from "react-icons/md";
 import moment from "moment";
+import VRScene from "./components/VRScene";
 
 function App() {
   const [currentMenu, setCurrentMenu] = useState("None");
   const [tasks, setTasks] = useState([]);
   const [courses, setCourses] = useState([]);
+  const [docRef, setDocRef] = useState(null);
+  const [score, setScore] = useState(-1);
 
   useEffect(() => {
     const url =
@@ -70,63 +73,76 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <div className="main-view">
-        {
-          <div
-            className="task-manager-tab"
-            style={{
-              display: currentMenu === "Tasks" ? "block" : "none",
-            }}
-          >
-            <TaskManager tasks={tasks} setTasks={setTasks} courses={courses} />
-          </div>
-        }
-        {
-          <div
-            className="profile-tab"
-            style={{
-              display: currentMenu === "Profile" ? "block" : "none",
-            }}
-          >
-            <Profile />
-          </div>
-        }
-        {
-          <div
-            className="map-tab"
-            style={{
-              display: currentMenu === "Map" ? "block" : "none",
-            }}
-          >
-            <Map />
-          </div>
-        }
-      </div>
+    <>
+      <VRScene score={score} />
       <div>
-        <MdOutlineMap
-          onClick={() => {
-            setCurrentMenu(currentMenu === "Map" ? "None" : "Map");
-          }}
-          className="menu-button"
-          id="map-button"
-        />
-        <CgProfile
-          onClick={() => {
-            setCurrentMenu(currentMenu === "Profile" ? "None" : "Profile");
-          }}
-          className="menu-button"
-          id="profile-button"
-        />
-        <MdOutlineAssignment
-          onClick={() => {
-            setCurrentMenu(currentMenu === "Tasks" ? "None" : "Tasks");
-          }}
-          className="menu-button"
-          id="tasks-button"
-        />
+        <div className="main-view">
+          {
+            <div
+              className="task-manager-tab"
+              style={{
+                display: currentMenu === "Tasks" ? "block" : "none",
+              }}
+            >
+              <TaskManager
+                tasks={tasks}
+                setTasks={setTasks}
+                courses={courses}
+                docRef={docRef}
+              />
+            </div>
+          }
+          {
+            <div
+              className="profile-tab"
+              style={{
+                display: currentMenu === "Profile" ? "block" : "none",
+              }}
+            >
+              <Profile
+                score={score}
+                setScore={setScore}
+                docRef={docRef}
+                setDocRef={setDocRef}
+              />
+            </div>
+          }
+          {
+            <div
+              className="map-tab"
+              style={{
+                display: currentMenu === "Map" ? "block" : "none",
+              }}
+            >
+              <Map />
+            </div>
+          }
+        </div>
+        <div>
+          <MdOutlineMap
+            onClick={() => {
+              setCurrentMenu(currentMenu === "Map" ? "None" : "Map");
+            }}
+            className="menu-button"
+            id="map-button"
+          />
+          <CgProfile
+            onClick={() => {
+              setCurrentMenu(currentMenu === "Profile" ? "None" : "Profile");
+            }}
+            className="menu-button"
+            id="profile-button"
+          />
+          <MdOutlineAssignment
+            onClick={() => {
+              setCurrentMenu(currentMenu === "Tasks" ? "None" : "Tasks");
+            }}
+            className="menu-button"
+            id="tasks-button"
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

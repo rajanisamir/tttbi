@@ -3,105 +3,104 @@ import "aframe-particle-system-component";
 import { Entity, Scene } from "aframe-react";
 import React from "react";
 
-var delay = ( function() {
+var delay = (function () {
   var timer = 0;
-  return function(callback, ms) {
-      clearTimeout (timer);
-      timer = setTimeout(callback, ms);
+  return function (callback, ms) {
+    clearTimeout(timer);
+    timer = setTimeout(callback, ms);
   };
 })();
 
 // var rewardsPos = [{x: -4, z: -4}, {x: -3, z: -6}, {x: -3, z: 6}, {x: 4, z: 4}, {x: 6, z: -3}, {x: 6, z: 3}, {x: 3, z: 6}]
 
 class VRScene extends React.Component {
-  toggleMeditation = (object, instructionText, startText, world, place, models) => () => {
-    // meditate:
-    var scene = document.querySelector("#scene");
-    var sphere = scene.querySelector(object);
-    sphere.setAttribute("visible", 'true');
-    if(world==="#world1")
-      sphere.setAttribute(
-        "animation",
-        "property: scale; to: .5 .5 .5; dur: 4000; dir: alternate; loop: true;"
-      );
-    if(world==="#world2"){
-      sphere.setAttribute(
-        "animation",
-        "property: components.material.material.color; type: color; from: #cecee2; to: purple; dur: 8000; delay: 500; loop: true; dir: alternate"
-      );
-      // sphere.setAttribute(
-      //   "animation__2",
-      //   "property: components.material.material.color; type: color; to: blue; dur: 3000; delay: 4000; loop: true;"
-      // );
-      // sphere.setAttribute(
-      //   "animation__3",
-      //   "property: components.material.material.color; type: color; to: teal; dur: 3000; delay: 7000; loop: true;"
-      // );
-      // sphere.setAttribute(
-      //   "animation__4",
-      //   "property: components.material.material.color; type: color; to: green; dur: 3000; delay: 1000; loop: true;"
-      // );
-    }
-    if(world==="#world3")
-      sphere.setAttribute(
-        "animation",
-        "property: rotation; from: 0 0 0; to: 359 359 359; dur: 4000; loop: true;"
-      );
-    var meditationInstr = scene.querySelector(instructionText);
-    meditationInstr.setAttribute("visible", 'true');
-    var startMed = scene.querySelector(startText);
-    startMed.setAttribute("visible", 'false');
+  toggleMeditation =
+    (object, instructionText, startText, world, place, models) => () => {
+      // meditate:
+      var scene = document.querySelector("#scene");
+      var sphere = scene.querySelector(object);
+      sphere.setAttribute("visible", "true");
+      if (world === "#world1")
+        sphere.setAttribute(
+          "animation",
+          "property: scale; to: .5 .5 .5; dur: 4000; dir: alternate; loop: true;"
+        );
+      if (world === "#world2") {
+        sphere.setAttribute(
+          "animation",
+          "property: components.material.material.color; type: color; from: #cecee2; to: purple; dur: 8000; delay: 500; loop: true; dir: alternate"
+        );
+        // sphere.setAttribute(
+        //   "animation__2",
+        //   "property: components.material.material.color; type: color; to: blue; dur: 3000; delay: 4000; loop: true;"
+        // );
+        // sphere.setAttribute(
+        //   "animation__3",
+        //   "property: components.material.material.color; type: color; to: teal; dur: 3000; delay: 7000; loop: true;"
+        // );
+        // sphere.setAttribute(
+        //   "animation__4",
+        //   "property: components.material.material.color; type: color; to: green; dur: 3000; delay: 1000; loop: true;"
+        // );
+      }
+      if (world === "#world3")
+        sphere.setAttribute(
+          "animation",
+          "property: rotation; from: 0 0 0; to: 359 359 359; dur: 4000; loop: true;"
+        );
+      var meditationInstr = scene.querySelector(instructionText);
+      meditationInstr.setAttribute("visible", "true");
+      var startMed = scene.querySelector(startText);
+      startMed.setAttribute("visible", "false");
 
-    var entity = document.createElement('a-entity');  
-    scene.appendChild(entity);     
-    
-    var model = models[Math.floor(Math.random()*models.length)];
+      var entity = document.createElement("a-entity");
+      scene.appendChild(entity);
 
-    delay( () => {
-      sphere.setAttribute("visible", 'false');
-      meditationInstr.setAttribute("visible", 'false');
-      startMed.setAttribute("visible", 'true');
+      var model = models[Math.floor(Math.random() * models.length)];
 
-      var reward = scene.querySelector(model).getObject3D('mesh').clone();
-      entity.setObject3D('mesh', reward);   
-      if(model === "#bush")
-        entity.setAttribute('scale', '.03, .03, .03');
-      if(model === "#flower1")
-        entity.setAttribute('scale', '.01, .01, .01');
-      if(model === "#lotus1")
-        entity.setAttribute('scale', '.25, .25, .25');
-      var worldP = scene.querySelector(world).getAttribute('position');
-      var pos =  scene.querySelector(place).getAttribute('position');
-      var offsetx = Math.random()*10 - 5;
-      var offsetz = Math.random()*10 - 5;
-      entity.setAttribute('position', {x:worldP.x + pos.x + offsetx, y:pos.y, z:pos.z + worldP.z + offsetz});
-      entity.setAttribute('visible', 'true');
-    },
-    15000);
-  };
+      delay(() => {
+        sphere.setAttribute("visible", "false");
+        meditationInstr.setAttribute("visible", "false");
+        startMed.setAttribute("visible", "true");
 
-  delay = ( function() {
+        var reward = scene.querySelector(model).getObject3D("mesh").clone();
+        entity.setObject3D("mesh", reward);
+        if (model === "#bush") entity.setAttribute("scale", ".03, .03, .03");
+        if (model === "#flower1") entity.setAttribute("scale", ".01, .01, .01");
+        if (model === "#lotus1") entity.setAttribute("scale", ".25, .25, .25");
+        var worldP = scene.querySelector(world).getAttribute("position");
+        var pos = scene.querySelector(place).getAttribute("position");
+        var offsetx = Math.random() * 10 - 5;
+        var offsetz = Math.random() * 10 - 5;
+        entity.setAttribute("position", {
+          x: worldP.x + pos.x + offsetx,
+          y: pos.y,
+          z: pos.z + worldP.z + offsetz,
+        });
+        entity.setAttribute("visible", "true");
+      }, 15000);
+    };
+
+  delay = (function () {
     var timer = 0;
-    return function(callback, ms) {
-        clearTimeout (timer);
-        timer = setTimeout(callback, ms);
+    return function (callback, ms) {
+      clearTimeout(timer);
+      timer = setTimeout(callback, ms);
     };
   })();
 
   handleWorlds = () => {
     var scene = document.querySelector("#scene");
     var world2 = scene.querySelector("#world2");
-    if (global.assignmentScore > 20) {
+    if (this.props.score >= 25) {
       world2.setAttribute("visible", "true");
-    }
-    else {
+    } else {
       world2.setAttribute("visible", "false");
     }
     var world3 = scene.querySelector("#world3");
-    if (global.assignmentScore > 50) {
+    if (this.props.score >= 75) {
       world3.setAttribute("visible", "true");
-    }
-    else {
+    } else {
       world3.setAttribute("visible", "false");
     }
   };
@@ -145,7 +144,12 @@ class VRScene extends React.Component {
       "#ffd3ab",
     ];
     return (
-      <Scene id="scene" events={{ click: this.handleWorlds }} shadow="type: pcfsoft" fog="type: exponential; density: 0.015; color: #7BC8A4">
+      <Scene
+        id="scene"
+        events={{ click: this.handleWorlds }}
+        shadow="type: pcfsoft"
+        fog="type: exponential; density: 0.015; color: #7BC8A4"
+      >
         <a-assets>
           <a-asset-item id="tree-o" src="models/tree2.obj"></a-asset-item>
           <a-asset-item id="tree-m" src="models/tree2.mtl"></a-asset-item>
@@ -155,10 +159,22 @@ class VRScene extends React.Component {
           <a-asset-item id="crystal-m" src="models/crystal.mtl"></a-asset-item>
           <a-asset-item id="bush-o" src="models/bush.obj"></a-asset-item>
           <a-asset-item id="bush-m" src="models/bush.mtl"></a-asset-item>
-          <a-asset-item id="palm_tree-o" src="models/Palm_Tree.obj"></a-asset-item>
-          <a-asset-item id="palm_tree-m" src="models/Palm_Tree.mtl"></a-asset-item>
-          <a-asset-item id="cactus-o" src="models/Cactus_lowpoly.obj"></a-asset-item>
-          <a-asset-item id="cactus-m" src="models/Cactus_lowpoly.mtl"></a-asset-item>
+          <a-asset-item
+            id="palm_tree-o"
+            src="models/Palm_Tree.obj"
+          ></a-asset-item>
+          <a-asset-item
+            id="palm_tree-m"
+            src="models/Palm_Tree.mtl"
+          ></a-asset-item>
+          <a-asset-item
+            id="cactus-o"
+            src="models/Cactus_lowpoly.obj"
+          ></a-asset-item>
+          <a-asset-item
+            id="cactus-m"
+            src="models/Cactus_lowpoly.mtl"
+          ></a-asset-item>
           <a-asset-item id="fir-o" src="models/Fir_Tree.obj"></a-asset-item>
           <a-asset-item id="fir-m" src="models/Fir_Tree.mtl"></a-asset-item>
         </a-assets>
@@ -185,14 +201,14 @@ class VRScene extends React.Component {
         />
         <Entity primitive="a-sky" color="#7BC8A4" />
         <Entity
-            primitive="a-plane"
-            position="0 -0.1 0"
-            rotation="-90 0 0"
-            width="2000"
-            height="2000"
-            color="#7BC8A4"
-            shadow="receive: false"
-          />
+          primitive="a-plane"
+          position="0 -0.1 0"
+          rotation="-90 0 0"
+          width="2000"
+          height="2000"
+          color="#7BC8A4"
+          shadow="receive: false"
+        />
         <Entity id="world1" visible="true">
           <Entity
             primitive="a-plane"
@@ -473,7 +489,7 @@ class VRScene extends React.Component {
                 "#start-med",
                 "#world1",
                 "#pond",
-                ["#bush", "#lotus1", "#flower1"],
+                ["#bush", "#lotus1", "#flower1"]
               ),
             }}
           >
@@ -868,13 +884,12 @@ class VRScene extends React.Component {
               color={cube_tree_colors[0]}
               position="0 5 0"
             >
-            <Entity
-              primitive="a-sphere"
-              radius="2"
-              color={cube_tree_colors[0]}
-              position="0 3 0"
-            ></Entity>
-              {" "}
+              <Entity
+                primitive="a-sphere"
+                radius="2"
+                color={cube_tree_colors[0]}
+                position="0 3 0"
+              ></Entity>{" "}
             </Entity>
           </Entity>
           <Entity id="tree" shadow="cast: true" position="-15 0 -10">
@@ -894,13 +909,12 @@ class VRScene extends React.Component {
               color={sphere_tree_colors[1]}
               position="0 4 0"
             >
-            <Entity
-              primitive="a-sphere"
-              radius="1.5"
-              color={sphere_tree_colors[1]}
-              position="0 3 0"
-            ></Entity>
-              {" "}
+              <Entity
+                primitive="a-sphere"
+                radius="1.5"
+                color={sphere_tree_colors[1]}
+                position="0 3 0"
+              ></Entity>{" "}
             </Entity>
           </Entity>
           <Entity id="tree" shadow="cast: true" position="-25 0 -5">
@@ -925,8 +939,7 @@ class VRScene extends React.Component {
               radius="1.5"
               color={sphere_tree_colors[2]}
               position="0 6 0"
-            ></Entity>
-              {" "}
+            ></Entity>{" "}
           </Entity>
           <Entity id="tree" shadow="cast: true" position="-32 0 -30">
             <Entity
@@ -956,8 +969,7 @@ class VRScene extends React.Component {
               radius="2.5"
               color={sphere_tree_colors[3]}
               position="0 4 0"
-            ></Entity>
-              {" "}
+            ></Entity>{" "}
           </Entity>
           <Entity id="tree" shadow="cast: true" position="3 0 -40">
             <Entity
@@ -981,8 +993,7 @@ class VRScene extends React.Component {
               radius="1"
               color={sphere_tree_colors[4]}
               position="0 4.5 0"
-            ></Entity>
-              {" "}
+            ></Entity>{" "}
           </Entity>
           <Entity id="tree" shadow="cast: true" position="-10 0 -38">
             <Entity
@@ -1006,8 +1017,7 @@ class VRScene extends React.Component {
               radius="2"
               color={sphere_tree_colors[5]}
               position="0 2 0"
-            ></Entity>
-              {" "}
+            ></Entity>{" "}
           </Entity>
           <Entity id="tree" shadow="cast: true" position="-4 0 -8">
             <Entity
@@ -1031,8 +1041,7 @@ class VRScene extends React.Component {
               radius="2"
               color={sphere_tree_colors[4]}
               position="0 3.5 0"
-            ></Entity>
-              {" "}
+            ></Entity>{" "}
           </Entity>
           <Entity id="tree" shadow="cast: true" position="-15 0 -20">
             <Entity
@@ -1056,8 +1065,7 @@ class VRScene extends React.Component {
               radius="1"
               color={sphere_tree_colors[1]}
               position="0 6.5 0"
-            ></Entity>
-              {" "}
+            ></Entity>{" "}
           </Entity>
           <Entity id="tree" shadow="cast: true" position="-35 0 -15">
             <Entity
@@ -1101,8 +1109,7 @@ class VRScene extends React.Component {
               radius="1"
               color={sphere_tree_colors[3]}
               position="0 4.5 0"
-            ></Entity>
-              {" "}
+            ></Entity>{" "}
           </Entity>
           <Entity id="tree" shadow="cast: true" position="13 0 -40">
             <Entity
@@ -1242,13 +1249,13 @@ class VRScene extends React.Component {
           visible="false"
         />
         <Entity
-            obj-model="obj: #flower;"
-            id="flower1"
-            position="-1 -1 -5"
-            scale="0.5 0.5 0.5"
-            shadow="cast: true"
-            visible="false"
-          />
+          obj-model="obj: #flower;"
+          id="flower1"
+          position="-1 -1 -5"
+          scale="0.5 0.5 0.5"
+          shadow="cast: true"
+          visible="false"
+        />
         <Entity
           obj-model="obj: #crystal-o; mtl: #crystal-m"
           id="crystal"
