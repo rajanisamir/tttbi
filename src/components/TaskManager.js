@@ -7,7 +7,6 @@ function TaskManager({ tasks, setTasks, courses }) {
     if (!task.text || /^\s*$/.test(task.text)) {
       return;
     }
-    console.log(task.course,courses);
     task.courseIndex = courses.indexOf(task.course);
     const newTasks = [task, ...tasks];
     setTasks(newTasks);

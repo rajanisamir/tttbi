@@ -4,7 +4,9 @@ import moment from "moment";
 function TaskEntry({ onSubmit, categoryNames }) {
   const [input, setInput] = useState("");
   const [dateInput, setDateInput] = useState("");
-  const [categoryInput, setCategoryInput] = useState("All Categories");
+  const [categoryInput, setCategoryInput] = useState("");
+
+  const categories = categoryNames.filter((c) => c !== "All Categories");
 
   const onCategoryInput = (event) => {
     setCategoryInput(event.target.value);
@@ -69,7 +71,8 @@ function TaskEntry({ onSubmit, categoryNames }) {
       />
 
       <select className="category-select" onChange={onCategoryInput} >
-        {categoryNames.map((option) => (
+        <option selected disabled>Category</option>
+        {categories.map((option) => (
           <option value={option}>{option}</option>
         ))}
       </select>
