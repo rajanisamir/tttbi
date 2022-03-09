@@ -29,7 +29,6 @@ function App() {
           .replaceAll("True", "true")
           .replaceAll("False", "false")
       ).assignments;
-      console.log(json);
       let assignments = [];
       let courseList = [];
       json.forEach((assignment) => {
@@ -115,7 +114,7 @@ function App() {
                 display: currentMenu === "Map" ? "block" : "none",
               }}
             >
-              <Map />
+              <Map score={score} />
             </div>
           }
         </div>

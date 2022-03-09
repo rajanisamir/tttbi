@@ -521,7 +521,11 @@ class VRScene extends React.Component {
             />
           </Entity>
         </Entity>
-        <Entity id="world2" visible={this.props.score >= 25 ? "true" : "false"} position="0 0 -50">
+        <Entity
+          id="world2"
+          visible={this.props.score >= 25 ? "true" : "false"}
+          position="0 0 -50"
+        >
           <Entity
             primitive="a-plane"
             position="0 0 -54"
@@ -846,7 +850,11 @@ class VRScene extends React.Component {
             />
           </Entity>
         </Entity>
-        <Entity id="world3" visible={this.props.score >= 112 ? "true" : "false"} position="100 0 -30">
+        <Entity
+          id="world3"
+          visible={this.props.score >= 75 ? "true" : "false"}
+          position="100 0 -30"
+        >
           <Entity
             primitive="a-plane"
             position="0 0 -34"
@@ -1220,11 +1228,7 @@ class VRScene extends React.Component {
           </Entity>
         </Entity>
         {/* camera rig + cursor */}
-        <Entity
-          primitive="a-camera"
-          id="rig"
-          cursor="rayOrigin: mouse"
-        >
+        <Entity primitive="a-camera" id="rig" cursor="rayOrigin: mouse">
           {" "}
         </Entity>
         <Entity

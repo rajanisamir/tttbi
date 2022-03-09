@@ -75,12 +75,15 @@ function TaskList({
         &nbsp;&nbsp;
         <select className="filter-button" onChange={onFilterCategories}>
           {categoryNames.map((option) => (
-            <option value={option}>{option}</option>
+            <option key={option} value={option}>
+              {option}
+            </option>
           ))}
         </select>
       </div>
       {sortTasks(filterDate, getFilteredTasks()).map((task, index) => (
         <TaskListItem
+          key={index}
           task={task}
           index={index}
           completeTask={completeTask}
