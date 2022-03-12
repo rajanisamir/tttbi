@@ -4,6 +4,7 @@ import "./App.css";
 import TaskManager from "./components/TaskManager";
 import Profile from "./components/Profile";
 import Map from "./components/Map";
+import Tutorial from "./components/Tutorial";
 import { MdOutlineMap } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { MdOutlineAssignment } from "react-icons/md";
@@ -11,7 +12,7 @@ import moment from "moment";
 import VRScene from "./components/VRScene";
 
 function App() {
-  const [currentMenu, setCurrentMenu] = useState("None");
+  const [currentMenu, setCurrentMenu] = useState("Tutorial");
   const [tasks, setTasks] = useState([]);
   const [courses, setCourses] = useState([]);
   const [docRef, setDocRef] = useState(null);
@@ -115,6 +116,21 @@ function App() {
               }}
             >
               <Map score={score} />
+            </div>
+          }
+          {
+            <div
+              className="tutorial-tab"
+              style={{
+                display: currentMenu === "Tutorial" ? "block" : "none",
+              }}
+            >
+              <Tutorial
+                closeMenu={() => {
+                  setCurrentMenu("None");
+                  console.log("hi");
+                }}
+              />
             </div>
           }
         </div>

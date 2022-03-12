@@ -500,6 +500,7 @@ class VRScene extends React.Component {
               position="-3 .5 2"
               scale="1.5 1.5 1"
               value="Click to start meditation session"
+              color="black"
             />
             <Entity
               primitive="a-sphere"
@@ -517,7 +518,7 @@ class VRScene extends React.Component {
               value="Breathe In and Out with the Sphere"
               font="monoid"
               position="-4 7 0"
-              color="teal"
+              color="black"
             />
           </Entity>
         </Entity>
@@ -823,6 +824,7 @@ class VRScene extends React.Component {
           >
             <Entity
               primitive="a-text"
+              color="black"
               id="start-med2"
               rotation="0 0 0"
               position="-3 .5 2"
@@ -846,7 +848,7 @@ class VRScene extends React.Component {
               When the sphere changes color, switch your focus to a different body part."
               font="monoid"
               position="-4 7 0"
-              color="#cecee2"
+              color="black"
             />
           </Entity>
         </Entity>
@@ -1203,6 +1205,7 @@ class VRScene extends React.Component {
               position="-3 .5 2"
               scale="1.5 1.5 1"
               value="Click to start meditation session"
+              color="black"
             />
             <Entity
               primitive="a-box"
@@ -1223,7 +1226,7 @@ class VRScene extends React.Component {
               value="Repeat a calming word or phrase to yourself"
               font="monoid"
               position="-4 7 0"
-              color="#b3d9b3"
+              color="black"
             />
           </Entity>
         </Entity>

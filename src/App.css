@@ -52,6 +52,17 @@
   align-items: center;
 }
 
+.tutorial-tab {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  background: rgba(0, 128, 128, 0.8);
+  border-radius: 40px;
+  padding-bottom: 32px;
+  height: max-content;
+  align-items: center;
+}
+
 .map-view {
   display: flex;
   flex-direction: column;
@@ -287,6 +298,29 @@ h1 {
   font-size: 45px;
   position: absolute;
   color: #fff;
+}
+
+.menu-button-tutorial {
+  margin-left: 10px;
+  font-size: 45px;
+  color: #fff;
+}
+
+.paragraph-tutorial {
+  vertical-align: middle;
+  color: white;
+  font-size: 16px;
+  margin: 0px 40px 30px 40px;
+}
+
+.close-icon {
+  cursor: pointer;
+  font-size: 40px;
+  margin-left: 20px;
+  color: #fff;
+  margin-top: 20px;
+  position: relative;
+  display: inline;
 }
 
 .filter-button {
